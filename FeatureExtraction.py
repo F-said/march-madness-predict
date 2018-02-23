@@ -1,16 +1,27 @@
 import pandas as pd
 import numpy as np
-from sklearn.utils import shuffle
 
 path = "/Users/farukhsaidmuratov/PycharmProjects/MarchMadness/"
 
+'''Train Data'''
 # Import data regarding team NCAA stats
-NCAADetailed = pd.read_csv(path + "NCAATourneyDetailedResults.csv")
+NCAADetailed = pd.read_csv(path + "NCAATourneyDetailedResults.csv").drop(labels="DayNum", axis=1)
+
+Train_data = pd.DataFrame
+Target_data = pd.DataFrame
+# Initialize all results to be 1
+Target_data["Result"] = 1
+Train_data["Season"] = NCAADetailed["Season"]
 
 # How I will handle tourney results:
-# Calculate differences between winning team and losing team. 
+# Calculate differences between winning team and losing team.
 # Randomize team ordering: First team will not always be winning team. That way I will have varying differences.
 # If Lteam_i is first, then y_train_i will be 0. If Wteam_i is first, then y_train_i will be 1.
+for index, row in NCAADetailed.iterrows():
+    coin_flip = np.random.randint(0, 2)
+    #if coin_flip is 1:
+        #Train_data["Team1"] = row["WTeamID"]
+
 
 # Import team seeds
 Seeds = pd.read_csv(path + "NCAATourneySeeds.csv")
@@ -23,4 +34,4 @@ Seeds["Seed"] = Seeds["Seed"].apply(lambda s: int(s[1:3]))
 # Import ordinal rank
 # Ordinals = pd.read_csv(path + "MasseyOrdinals.csv")
 
-
+'''Test Data'''
