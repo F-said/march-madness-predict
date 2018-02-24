@@ -23,6 +23,7 @@ len_init = [1 for x in range(len(NCAADetailed))]
 
 features = {"Score", "FGM", "FGA", "FGM3", "FGA3", "FTM", "FTA", "OR", "DR", "Ast", "TO", "Stl", "Blk", "PF"}
 Diff = "Diff"
+# Columns of length 'len_init'
 Train_data = pd.DataFrame({
     "Team1": len_init, "Team2": len_init, "ScoreDiff": len_init, "FGMDiff": len_init, "FGADiff": len_init,
     "FGM3Diff": len_init, "FGA3Diff": len_init, "FTMDiff": len_init, "FTADiff": len_init, "ORDiff": len_init,
@@ -46,15 +47,19 @@ for index, row in NCAADetailed.iterrows():
         Train_data["Team1"].iloc[index] = row[first + "TeamID"]
         Train_data["Team2"].iloc[index] = row[second + "TeamID"]
 
+        # Assign each feature according to difference between features of two teams
         for f_name in features:
             Train_data[f_name + Diff].iloc[index] = row[first + f_name] - row[second + f_name]
 
+        # Get corresponding seeds by accessing Seed loc where Season matches with train data Season and TeamID
+        # matches with either Team1 or Team2 ID from train data
         first_seed = Seeds.loc[(Seeds["Season"] == Train_data["Season"].iloc[index]) &
                                (Seeds["TeamID"] == Train_data["Team1"].iloc[index])].Seed
 
         second_seed = Seeds.loc[(Seeds["Season"] == Train_data["Season"].iloc[index]) &
                                 (Seeds["TeamID"] == Train_data["Team2"].iloc[index])].Seed
 
+        # Calculate differences between seeds
         Train_data["Seed" + Diff].iloc[index] = first_seed.iloc[0] - second_seed.iloc[0]
     else:
         first = "L"
