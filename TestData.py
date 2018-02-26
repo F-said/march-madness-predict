@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 from FeatureExtraction import features, Seeds
 
 path = "/Users/farukhsaidmuratov/PycharmProjects/MarchMadness/"
@@ -31,15 +30,16 @@ for index, row in sample_sub.iterrows():
 
     # For all features, find all stats of both team1 and team2. Collect all stats and average them for that season,
     # feature, and team. Find the difference between the two team averages. That will be the difference feature
-    # Do same for seeds 
+    # Do same for seeds
     for f_name in features:
-        ind_team1 = SeasonDetailed[((SeasonDetailed["WTeamID"] == int(team1)) | (SeasonDetailed["LTeamID"] == int(team1))) &
-                                   (SeasonDetailed["Season"] == int(year))]
-        ind_team2 = SeasonDetailed[((SeasonDetailed["WTeamID"] == int(team2)) | (SeasonDetailed["LTeamID"] == int(team2))) &
-                                   (SeasonDetailed["Season"] == int(year))]
+        ind_team1 = SeasonDetailed[((SeasonDetailed["WTeamID"] == team1) | (SeasonDetailed["LTeamID"] == team1)) &
+                                   (SeasonDetailed["Season"] == year)]
+        ind_team2 = SeasonDetailed[((SeasonDetailed["WTeamID"] == team2) | (SeasonDetailed["LTeamID"] == team2)) &
+                                   (SeasonDetailed["Season"] == year)]
 
-        avg_team1 = ind_team1[ind_team1["WTeamID"] == int(team1)]["W" + f_name].mean() + ind_team1[ind_team1["LTeamID"] == int(team1)]["L" + f_name].mean()
-        avg_team2 = ind_team2[ind_team2["WTeamID"] == int(team2)]["W" + f_name].mean() + ind_team2[ind_team2["LTeamID"] == int(team2)]["L" + f_name].mean()
+        # TODO Check for instances where a team never lost or never won
+        avg_team1 = ind_team1[ind_team1["WTeamID"] == team1]["W" + f_name].mean() + ind_team1[ind_team1["LTeamID"] == team1]["L" + f_name].mean()
+        avg_team2 = ind_team2[ind_team2["WTeamID"] == team2]["W" + f_name].mean() + ind_team2[ind_team2["LTeamID"] == team2]["L" + f_name].mean()
 
         Test_data[f_name + "Diff"].iloc[index] = avg_team1 - avg_team2
 
