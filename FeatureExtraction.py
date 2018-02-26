@@ -81,6 +81,6 @@ for index, row in NCAADetailed.iterrows():
         Target_data.iloc[index] = 0
 
 # Create CSV File so you don't have to load every time
-Train_data.to_csv(path_or_buf="X_train.csv", index=False)
-Target_data.to_csv(path_or_buf="y_train.csv", index=False)
+Train_data.to_csv(path_or_buf="X_train_tourney.csv", index=False)
+Target_data.to_csv(path_or_buf="y_train_tourney.csv", index=False)
 
