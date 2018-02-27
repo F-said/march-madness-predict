@@ -2,12 +2,14 @@ import pandas as pd
 import numpy as np
 from FeatureExtraction import Seeds, NCAADetailed, features
 
+'''
+Test data based on team NCAA average 
+'''
+
 path = "/Users/farukhsaidmuratov/PycharmProjects/MarchMadness/"
 
-# Create Test Data
 sample_sub = pd.read_csv(path + "SampleSubmissionStage1.csv").drop(labels="Pred", axis=1)
 len_init = [1 for x in range(len(sample_sub))]
-
 Diff = "Diff"
 
 # Columns of length 'len_init'
