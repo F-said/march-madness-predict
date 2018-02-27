@@ -19,14 +19,14 @@ Test_data.insert(0, "Season", seasons)
 for index, row in sample_sub.iterrows():
     # Split the submission line into relevant data
     line = str(sample_sub.iloc[index].ID).split('_')
-    year = line[0]
-    team1 = line[1]
-    team2 = line[2]
+    year = int(line[0])
+    team1 = int(line[1])
+    team2 = int(line[2])
 
     # Set data sample to contain season team1 and team2
-    Test_data["Season"].iloc[index] = int(year)
-    Test_data["Team1"].iloc[index] = int(team1)
-    Test_data["Team2"].iloc[index] = int(team2)
+    Test_data["Season"].iloc[index] = year
+    Test_data["Team1"].iloc[index] = team1
+    Test_data["Team2"].iloc[index] = team2
 
     # For all features, find all stats of both team1 and team2. Collect all stats and average them for that season,
     # feature, and team. Find the difference between the two team averages. That will be the difference feature
@@ -37,9 +37,9 @@ for index, row in sample_sub.iterrows():
         ind_team2 = SeasonDetailed[((SeasonDetailed["WTeamID"] == team2) | (SeasonDetailed["LTeamID"] == team2)) &
                                    (SeasonDetailed["Season"] == year)]
 
-        # TODO Check for instances where a team never lost or never won
-        avg_team1 = ind_team1[ind_team1["WTeamID"] == team1]["W" + f_name].mean() + ind_team1[ind_team1["LTeamID"] == team1]["L" + f_name].mean()
-        avg_team2 = ind_team2[ind_team2["WTeamID"] == team2]["W" + f_name].mean() + ind_team2[ind_team2["LTeamID"] == team2]["L" + f_name].mean()
+        # TODO Check for instances where a team never lost or never won for a season. Find a way to get average stats of team
+        avg_team1 = round((ind_team1[ind_team1["WTeamID"] == team1]["W" + f_name].mean() + ind_team1[ind_team1["LTeamID"] == team1]["L" + f_name].mean())/2)
+        avg_team2 = round((ind_team2[ind_team2["WTeamID"] == team2]["W" + f_name].mean() + ind_team2[ind_team2["LTeamID"] == team2]["L" + f_name].mean())/2)
 
         Test_data[f_name + "Diff"].iloc[index] = avg_team1 - avg_team2
 
