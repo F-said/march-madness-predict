@@ -17,6 +17,8 @@ Seeds["Seed"] = Seeds["Seed"].apply(lambda s: int(s[1:3]))
 # Import ordinal rank
 Ordinals = pd.read_csv(path + "MasseyOrdinals.csv")
 
+# Uncomment only to alter Ordinals_new.csv
+'''
 Ordinals = Ordinals[(Ordinals["RankingDayNum"] == 133)]
 features = list(Ordinals.SystemName.unique())
 years = list(NCAADetailed.Season.unique())
@@ -34,12 +36,18 @@ for index, row in NCAADetailed.iterrows():
             Ordinals_new = Ordinals_new[Ordinals_new.SystemName.str.contains(f_name) == False]
             features.remove(f_name)
 
+# Create CSV File so you don't have to load every time
+Ordinals_new.to_csv(path_or_buf="Ordinals_new.csv", index=False)
+'''
+Ordinals_new = pd.read_csv(path + "Ordinals_new.csv")
+features = list(Ordinals_new.SystemName.unique())
+
 # Create Train and Test Data
 len_init = [1 for x in range(len(NCAADetailed))]
 Diff = "Diff"
 
 # Columns of length 'len_init'
-Train_data = pd.DataFrame({"Team1": len_init, "Team2": len_init})
+Train_data = pd.DataFrame({"Team1": len_init, "Team2": len_init, "SeedDiff": len_init})
 for f_name in features:
     Train_data.insert(0, f_name + Diff, len_init)
 Train_data.insert(0, "Season", NCAADetailed["Season"])
