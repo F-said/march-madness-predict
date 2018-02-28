@@ -1,5 +1,5 @@
 import pandas as pd
-from FeatureExtraction_tourney import features, Seeds
+from FeatureExtraction import features, Seeds
 
 '''
 Test data based on team season average 
