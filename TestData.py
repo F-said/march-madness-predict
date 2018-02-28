@@ -1,23 +1,23 @@
 import pandas as pd
-from FeatureExtraction import features, Seeds
-
-'''
-Test data based on team season average 
-'''
 
 path = "/Users/farukhsaidmuratov/PycharmProjects/MarchMadness/"
-
+Ordinals = pd.read_csv(path + "Ordinals_new.csv")
 sample_sub = pd.read_csv(path + "SampleSubmissionStage1.csv").drop(labels="Pred", axis=1)
-SeasonDetailed = pd.read_csv(path + "RegularSeasonDetailedResults.csv").drop(labels="DayNum", axis=1)
-len_init = [1 for x in range(len(sample_sub))]
-Diff = "Diff"
 
-Test_data = pd.DataFrame({
-    "Team1": len_init, "Team2": len_init, "ScoreDiff": len_init, "FGMDiff": len_init, "FGADiff": len_init,
-    "FGM3Diff": len_init, "FGA3Diff": len_init, "FTMDiff": len_init, "FTADiff": len_init, "ORDiff": len_init,
-    "DRDiff": len_init, "AstDiff": len_init, "TODiff": len_init, "StlDiff": len_init, "BlkDiff": len_init,
-    "PFDiff": len_init, "SeedDiff": len_init
-})
+len_init = [1 for x in range(len(sample_sub))]
+
+# Import team seeds
+Seeds = pd.read_csv(path + "NCAATourneySeeds.csv")
+# Drop rows where season is before 2003, since Detailed Results start at 2003.
+Seeds = Seeds[Seeds["Season"] >= 2003]
+# We only care about seed ranking, so take off region
+Seeds["Seed"] = Seeds["Seed"].apply(lambda s: int(s[1:3]))
+
+Diff = "Diff"
+features = list(Ordinals.SystemName.unique())
+Test_data = pd.DataFrame({"Team1": len_init, "Team2": len_init, "SeedDiff": len_init})
+for f_name in features:
+    Test_data.insert(0, f_name + Diff, len_init)
 seasons = pd.Series(data=len_init)
 Test_data.insert(0, "Season", seasons)
 
@@ -37,30 +37,13 @@ for index, row in sample_sub.iterrows():
     # feature, and team. Find the difference between the two team averages. That will be the difference feature
     # Do same for seeds.
     for f_name in features:
-        ind_team1 = SeasonDetailed[((SeasonDetailed["WTeamID"] == team1) | (SeasonDetailed["LTeamID"] == team1)) &
-                                   (SeasonDetailed["Season"] == year)]
-        ind_team2 = SeasonDetailed[((SeasonDetailed["WTeamID"] == team2) | (SeasonDetailed["LTeamID"] == team2)) &
-                                   (SeasonDetailed["Season"] == year)]
+        team1_rank = Ordinals[(Ordinals["Season"] == year) & (Ordinals["SystemName"] == f_name)]
+        team1_rank = team1_rank[(team1_rank["TeamID"] == team1)]["OrdinalRank"]
 
-        if ind_team1[ind_team1["LTeamID"] == team1].empty:
-            avg_team1 = (ind_team1[ind_team1["WTeamID"] == team1]["W" + f_name].mean())
-        elif ind_team1[ind_team1["WTeamID"] == team1].empty:
-            avg_team1 = (ind_team1[ind_team1["LTeamID"] == team1]["L" + f_name].mean())
+        team2_rank = Ordinals[(Ordinals["Season"] == year) & (Ordinals["SystemName"] == f_name)]
+        team2_rank = team2_rank[(team2_rank["TeamID"] == team2)]["OrdinalRank"]
 
-        if ind_team2[ind_team2["LTeamID"] == team2].empty:
-            avg_team2 = (ind_team2[ind_team2["WTeamID"] == team2]["W" + f_name].mean())
-        elif ind_team2[ind_team2["WTeamID"] == team2].empty:
-            avg_team2 = (ind_team2[ind_team2["LTeamID"] == team2]["L" + f_name].mean())
-
-        if not(ind_team1[ind_team1["LTeamID"] == team1].empty or ind_team1[ind_team1["WTeamID"] == team1].empty) and not(ind_team2[ind_team2["LTeamID"] == team2].empty or ind_team2[ind_team2["WTeamID"] == team2].empty):
-            avg_team1 = (ind_team1[ind_team1["WTeamID"] == team1]["W" + f_name].mean() + ind_team1[ind_team1["LTeamID"] == team1]["L" + f_name].mean())/2
-            avg_team2 = (ind_team2[ind_team2["WTeamID"] == team2]["W" + f_name].mean() + ind_team2[ind_team2["LTeamID"] == team2]["L" + f_name].mean())/2
-        else:
-            # THIS WILL NEVER HAPPEN
-            avg_team1 = 0
-            avg_team2 = 0
-
-        Test_data[f_name + Diff].iloc[index] = int(round(avg_team1 - avg_team2))
+        Test_data[f_name + Diff].iloc[index] = team1_rank.iloc[0] - team2_rank.iloc[0]
 
     first_seed = Seeds.loc[(Seeds["Season"] == Test_data["Season"].iloc[index]) &
                            (Seeds["TeamID"] == Test_data["Team1"].iloc[index])].Seed
@@ -72,5 +55,5 @@ for index, row in sample_sub.iterrows():
     Test_data["Seed" + Diff].iloc[index] = first_seed.iloc[0] - second_seed.iloc[0]
 
 # Create CSV File so you don't have to load every time
-Test_data.to_csv(path_or_buf="X_test_season.csv", index=False)
+Test_data.to_csv(path_or_buf="X_test_seedordinal.csv", index=False)
 

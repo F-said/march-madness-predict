@@ -14,11 +14,11 @@ Seeds = Seeds[Seeds["Season"] >= 2003]
 # We only care about seed ranking, so take off region
 Seeds["Seed"] = Seeds["Seed"].apply(lambda s: int(s[1:3]))
 
+# Uncomment only to alter Ordinals_new.csv
+'''
 # Import ordinal rank
 Ordinals = pd.read_csv(path + "MasseyOrdinals.csv")
 
-# Uncomment only to alter Ordinals_new.csv
-'''
 Ordinals = Ordinals[(Ordinals["RankingDayNum"] == 133)]
 features = list(Ordinals.SystemName.unique())
 years = list(NCAADetailed.Season.unique())
@@ -39,6 +39,7 @@ for index, row in NCAADetailed.iterrows():
 # Create CSV File so you don't have to load every time
 Ordinals_new.to_csv(path_or_buf="Ordinals_new.csv", index=False)
 '''
+
 Ordinals_new = pd.read_csv(path + "Ordinals_new.csv")
 features = list(Ordinals_new.SystemName.unique())
 
