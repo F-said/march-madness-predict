@@ -16,23 +16,23 @@ Seeds["Seed"] = Seeds["Seed"].apply(lambda s: int(s[1:3]))
 
 # Import ordinal rank
 Ordinals = pd.read_csv(path + "MasseyOrdinals.csv")
-# Only consider rankings up to March Madness and teams in NCAA tournamant
-l_teams = list(NCAADetailed.LTeamID.unique())
-w_teams = list(NCAADetailed.WTeamID.unique())
-set_teams = set(l_teams + w_teams)
 
 Ordinals = Ordinals[(Ordinals["RankingDayNum"] == 133)]
 features = list(Ordinals.SystemName.unique())
+years = list(NCAADetailed.Season.unique())
 
 # Keep only the rating system that contains all teams from NCAA tourneys from 2003
-Ordinal_temp = Ordinals
-for f_name in features:
-    Ordinal_addend = Ordinals[Ordinals["SystemName"] == f_name]
-    compare_set = set(Ordinal_addend.TeamID)
-    if not(set_teams.issubset(compare_set)):
-        Ordinal_temp = Ordinal_temp[Ordinal_temp.SystemName.str.contains(f_name) == False]
-        features.remove(f_name)
-
+Ordinals_new = Ordinals
+for index, row in NCAADetailed.iterrows():
+    l_teams = list(NCAADetailed[NCAADetailed["Season"] == row["Season"]].LTeamID.unique())
+    w_teams = list(NCAADetailed[NCAADetailed["Season"] == row["Season"]].WTeamID.unique())
+    set_teams = set(l_teams + w_teams)
+    for f_name in features:
+        Ordinal_addend = Ordinals[(Ordinals["SystemName"] == f_name) & (Ordinals["Season"] == row["Season"])]
+        compare_set = set(Ordinal_addend.TeamID)
+        if not(set_teams.issubset(compare_set)):
+            Ordinals_new = Ordinals_new[Ordinals_new.SystemName.str.contains(f_name) == False]
+            features.remove(f_name)
 
 # Create Train and Test Data
 len_init = [1 for x in range(len(NCAADetailed))]
@@ -55,49 +55,49 @@ for index, row in NCAADetailed.iterrows():
     if coin_flip is 1:
         first = "W"
         second = "L"
-        Train_data["Team1"].iloc[index] = row[first + "TeamID"]
-        Train_data["Team2"].iloc[index] = row[second + "TeamID"]
+        first_team = Train_data["Team1"].iloc[index] = row[first + "TeamID"]
+        second_team = Train_data["Team2"].iloc[index] = row[second + "TeamID"]
 
         # Assign each feature according to difference between system rank of two teams
         for f_name in features:
-            team1_rank = Ordinals[(Ordinals["Season"] == Train_data["Season"].iloc[index]) & (Ordinals["TeamID"] ==
-                                  Train_data["Team1"].iloc[index]) & (Ordinals["SystemName"] == f_name)].OrdinalRank
+            team1_rank = Ordinals_new[(Ordinals_new["Season"] == row["Season"]) & (Ordinals_new["SystemName"] == f_name)]
+            team1_rank = team1_rank[(team1_rank["TeamID"] == first_team)]["OrdinalRank"]
 
-            team2_rank = Ordinals[(Ordinals["Season"] == Train_data["Season"].iloc[index]) & (Ordinals["TeamID"] ==
-                                Train_data["Team2"].iloc[index]) & (Ordinals["SystemName"] == f_name)].OrdinalRank
+            team2_rank = Ordinals_new[(Ordinals_new["Season"] == row["Season"]) & (Ordinals_new["SystemName"] == f_name)]
+            team2_rank = team2_rank[(team2_rank["TeamID"] == second_team)]["OrdinalRank"]
 
             Train_data[f_name + Diff].iloc[index] = team1_rank.iloc[0] - team2_rank.iloc[0]
 
         # Get corresponding seeds by accessing Seed loc where Season matches with train data Season and TeamID
         # matches with either Team1 or Team2 ID from train data
         first_seed = Seeds.loc[(Seeds["Season"] == Train_data["Season"].iloc[index]) &
-                               (Seeds["TeamID"] == Train_data["Team1"].iloc[index])].Seed
+                               (Seeds["TeamID"] == first_team)].Seed
 
         second_seed = Seeds.loc[(Seeds["Season"] == Train_data["Season"].iloc[index]) &
-                                (Seeds["TeamID"] == Train_data["Team2"].iloc[index])].Seed
+                                (Seeds["TeamID"] == second_team)].Seed
 
         # Calculate differences between seeds
         Train_data["Seed" + Diff].iloc[index] = first_seed.iloc[0] - second_seed.iloc[0]
     else:
         first = "L"
         second = "W"
-        Train_data["Team1"].iloc[index] = row[first + "TeamID"]
-        Train_data["Team2"].iloc[index] = row[second + "TeamID"]
+        first_team = Train_data["Team1"].iloc[index] = row[first + "TeamID"]
+        second_team = Train_data["Team2"].iloc[index] = row[second + "TeamID"]
 
         for f_name in features:
-            team1_rank = Ordinals[(Ordinals["Season"] == Train_data["Season"].iloc[index]) & (Ordinals["TeamID"] ==
-                                  Train_data["Team1"].iloc[index]) & (Ordinals["SystemName"] == f_name)].OrdinalRank
+            team1_rank = Ordinals_new[(Ordinals_new["Season"] == row["Season"]) & (Ordinals_new["SystemName"] == f_name)]
+            team1_rank = team1_rank[(team1_rank["TeamID"] == first_team)]["OrdinalRank"]
 
-            team2_rank = Ordinals[(Ordinals["Season"] == Train_data["Season"].iloc[index]) & (Ordinals["TeamID"] ==
-                                Train_data["Team2"].iloc[index]) & (Ordinals["SystemName"] == f_name)].OrdinalRank
+            team2_rank = Ordinals_new[(Ordinals_new["Season"] == row["Season"]) & (Ordinals_new["SystemName"] == f_name)]
+            team2_rank = team2_rank[(team2_rank["TeamID"] == second_team)]["OrdinalRank"]
 
             Train_data[f_name + Diff].iloc[index] = team1_rank.iloc[0] - team2_rank.iloc[0]
 
         first_seed = Seeds.loc[(Seeds["Season"] == Train_data["Season"].iloc[index]) &
-                               (Seeds["TeamID"] == Train_data["Team1"].iloc[index])].Seed
+                               (Seeds["TeamID"] == first_team)].Seed
 
         second_seed = Seeds.loc[(Seeds["Season"] == Train_data["Season"].iloc[index]) &
-                                (Seeds["TeamID"] == Train_data["Team2"].iloc[index])].Seed
+                                (Seeds["TeamID"] == second_team)].Seed
 
         Train_data["Seed" + Diff].iloc[index] = first_seed.iloc[0] - second_seed.iloc[0]
 
