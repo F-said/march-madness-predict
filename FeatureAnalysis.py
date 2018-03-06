@@ -30,5 +30,5 @@ plt.show()
 
 X_train = pd.DataFrame(selector.transform(X_train))
 X_test = pd.DataFrame(selector.transform(X_test))
-X_train.to_csv(path_or_buf="X_train_seedordinal_selected.csv")
-X_test.to_csv(path_or_buf="X_test_seedordinal_selected.csv")
+X_train.to_csv(path_or_buf="X_train_seedordinal_selected.csv", index=False)
+X_test.to_csv(path_or_buf="X_test_seedordinal_selected.csv", index=False)
