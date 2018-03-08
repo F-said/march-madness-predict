@@ -30,7 +30,7 @@ X_test_2017 = X_test[X_test["Season"] == 2017]
 
 
 # Gradient Boosting for each individual year
-gb = GradientBoostingClassifier(n_estimators=300, max_features='sqrt', max_depth=7, random_state=42, learning_rate=0.1)
+gb = GradientBoostingClassifier(n_estimators=300, max_features='auto', max_depth=5, random_state=42, learning_rate=0.01)
 
 gb.fit(X_train_2014, y_train_2014)
 y_pred_2014 = pd.DataFrame(gb.predict_proba(X_test_2014))[1]
@@ -45,8 +45,8 @@ gb.fit(X_train_2017, y_train_2017)
 y_pred_2017 = pd.DataFrame(gb.predict_proba(X_test_2017))[1]
 
 # Submit
-predictions1 = np.array(y_pred_2014, y_pred_2015)
-predictions2 = np.array(y_pred_2016, y_pred_2017)
+predictions1 = np.append(y_pred_2014, y_pred_2015)
+predictions2 = np.append(y_pred_2016, y_pred_2017)
 predictions = np.append(predictions1, predictions2)
 
 y_pred = pd.Series(predictions)
