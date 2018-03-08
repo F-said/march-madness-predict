@@ -14,7 +14,6 @@ from matplotlib.colors import ListedColormap
 '''NOT FINAL SUBMISSION SELECTION SUNDAY'''
 
 X_train_selected = pd.read_csv("X_train_seedordinal_selected.csv")
-X_train_pca = pd.read_csv("X_train_seedordinal_pca.csv")
 X_train = pd.read_csv("X_train_seedordinal.csv").drop(labels="Season", axis=1).drop(labels="Team1", axis=1).\
     drop(labels="Team2", axis=1)
 
@@ -22,7 +21,6 @@ y_train = pd.read_csv("y_train_seedordinal.csv")
 y_train = y_train["Result"]
 
 X_test_selected = pd.read_csv("X_test_seedordinal_selected.csv")
-X_test_pca = pd.read_csv("X_test_seedordinal_pca.csv")
 X_test = pd.read_csv("X_test_seedordinal.csv").drop(labels="Season", axis=1).drop(labels="Team1", axis=1).\
     drop(labels="Team2", axis=1)
 
@@ -63,13 +61,13 @@ forest.fit(X_train, y_train)
 forest_crossval = cross_val_score(forest, X_train, y_train, cv=fold_size)
 
 ### Gradient Boosting ###
-gb = GradientBoostingClassifier(n_estimators=50, max_features='sqrt', max_depth=5, random_state=42, learning_rate=0.01)
+gb = GradientBoostingClassifier(n_estimators=700, max_features='sqrt', max_depth=5, learning_rate=0.01, random_state=42)
 gb.fit(X_train, y_train)
 
 gb_crossval = cross_val_score(gb, X_train, y_train, cv=fold_size)
 
 
-'''KFold Cross Val Accuracy'''
+'''These don't mean anything in this context KFold Cross Val Accuracy'''
 print("bag_log CV Score: ", bag_log_crossval.mean())
 print("knn CV Score: ", knn_crossval.mean())
 print("Svc CV Score: ", svc_crossval.mean())
@@ -83,5 +81,6 @@ pred = pd.Series(probability[1])
 sub_file.insert(1, "Pred", pred)
 
 sub_file.to_csv(path_or_buf="submission_seedordinal.csv", index=False)
+
 
 
