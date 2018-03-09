@@ -8,6 +8,7 @@ from sklearn.calibration import CalibratedClassifierCV
 
 '''For Model Selection'''
 '''Suffering from look ahead bias as game results are already included in train set.'''
+'''Creates overfit predictions that will be used to train no look ahead bias model'''
 
 X_train_selected = pd.read_csv("X_train_seedordinal_selected.csv")
 X_train = pd.read_csv("X_train_seedordinal.csv").drop(labels="Season", axis=1).drop(labels="Team1", axis=1).\
@@ -53,16 +54,20 @@ cal_forest = CalibratedClassifierCV(base_estimator=forest, cv='prefit')
 cal_forest.fit(X_train, y_train)
 
 ### Gradient Boosting ###
-gb = GradientBoostingClassifier(n_estimators=700, max_features='sqrt', max_depth=5, random_state=42, learning_rate=0.01)
+gb = GradientBoostingClassifier(n_estimators=5000, max_features='sqrt', max_depth=5, random_state=42, learning_rate=0.01)
 gb.fit(X_train, y_train)
 y_pred = gb.predict(X_test)
 
-'''Submit predictions'''
-probability = pd.DataFrame(gb.predict_proba(X_test))
+'''Submit predictions and actual results for log loss function'''
+results = pd.Series(y_pred)
+sub_file_res = sub_file.copy()
+sub_file_res.insert(1, "Results", results)
+sub_file_res.to_csv(path_or_buf="results_seedordinal.csv", index=False)
 
+probability = pd.DataFrame(gb.predict_proba(X_test))
 pred = pd.Series(probability[1])
 sub_file.insert(1, "Pred", pred)
-
 sub_file.to_csv(path_or_buf="submission_seedordinal.csv", index=False)
+
 
 
