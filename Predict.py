@@ -1,14 +1,10 @@
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier, BaggingClassifier, GradientBoostingClassifier
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 import pandas as pd
 from sklearn.calibration import CalibratedClassifierCV
 
-
 '''For Model Selection'''
 '''Suffering from look ahead bias as game results are already included in train set.'''
-'''Creates overfit predictions that will be used to train no look ahead bias model'''
+'''Creates overfit predictions that will be used to train 'no look ahead bias' model'''
 
 X_train_selected = pd.read_csv("X_train_seedordinal_selected.csv")
 X_train = pd.read_csv("X_train_seedordinal.csv").drop(labels="Season", axis=1).drop(labels="Team1", axis=1).\
@@ -25,26 +21,6 @@ path = "/Users/farukhsaidmuratov/PycharmProjects/MarchMadness/"
 sub_file = pd.read_csv(path + "SampleSubmissionStage1.csv").drop(labels="Pred", axis=1)
 
 '''Learners'''
-### Log Regression ###
-# Hyperparameters found using gridsearch
-clf = LogisticRegression(C=0.001)
-
-bag_log = BaggingClassifier(base_estimator=clf, n_estimators=50, n_jobs=-1, oob_score=True, random_state=42)
-bag_log.fit(X_train, y_train)
-
-cal_clf = CalibratedClassifierCV(base_estimator=bag_log, cv='prefit')
-cal_clf.fit(X_train, y_train)
-
-### kNN classifier ###
-# Hyperparameters found using gridsearch
-knn = KNeighborsClassifier(algorithm='ball_tree', n_neighbors=17)
-knn.fit(X_train, y_train)
-
-### SVC ###
-# Hyperparameters found using gridsearch
-svc = SVC(C=0.001, kernel='linear', probability=True, random_state=42)
-svc.fit(X_train, y_train)
-
 ### Random Forest ###
 forest = RandomForestClassifier(n_jobs=-1, n_estimators=500, criterion='gini', max_features='sqrt', max_depth=5,
                                 random_state=42, oob_score=True)

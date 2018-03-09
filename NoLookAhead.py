@@ -46,7 +46,7 @@ X_test_2016 = X_test[X_test["Season"] == 2016]
 X_test_2017 = X_test[X_test["Season"] == 2017]
 
 # Gradient Boosting for each individual year
-gb = GradientBoostingClassifier(n_estimators=700, max_features='sqrt', max_depth=5, random_state=42, learning_rate=0.05)
+gb = GradientBoostingClassifier(n_estimators=2000, max_features='sqrt', max_depth=5, random_state=42, learning_rate=0.01)
 
 gb.fit(X_train_2014, y_train_2014)
 y_pred_2014 = pd.DataFrame(gb.predict_proba(X_test_2014))[1]
@@ -85,9 +85,11 @@ predictions = np.append(predictions1, predictions2)
 y_pred = pd.Series(predictions)
 
 # Use log loss on predictions with 0.33 log loss to find best hyperparameters of gradient boosted trees
-y_true = pd.read_csv("results_seedordinal.csv")
+y_true = pd.read_csv("submission_seedordinal.csv")
 y_true = y_true["Pred"]
-print("Log Loss, compared to a submission with log loss of 0.33: ", log_loss(y_true, y_pred))
+falseloss = abs((y_true.subtract(y_pred)).mean())
+print("false log loss:", falseloss)
+# print("Log Loss, compared to a submission with log loss of 0.33: ", log_loss(y_true, y_pred))
 
 sub_file.insert(1, "Pred", y_pred)
 sub_file.to_csv(path_or_buf="submission_seedordinal_nobias.csv", index=False)
