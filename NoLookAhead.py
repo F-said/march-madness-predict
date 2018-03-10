@@ -4,17 +4,17 @@ import numpy as np
 from sklearn.calibration import CalibratedClassifierCV
 
 
-def find_GB_params(X14, y14, X15, y15, X16, y16, X17, y17):
+def find_GB_params(X14, y14, X15, y15, X16, y16, X17, y17, test14, test15, test16, test17):
     # 760 calculations of GB
     # This is going to take disgustingly long
     # Use mean difference on predictions with 0.33 log loss to find best hyperparameters of gradient boosted trees
     y_close = pd.read_csv("submission_seedordinal_logloss33.csv")
     y_close = y_close["Pred"]
 
-    n_est = list(range(100, 1000, 50))
-    C = [0.0001, 0.001, 0.01, 0.1]
-    max_feat = ['sqrt', 'auto']
-    depth = list(range(3, 8))
+    n_est = list(range(290, 310, 1))
+    C = [0.0088, 0.009, 0.0093]
+    max_feat = ['auto', 'sqrt']
+    depth = [4, 5, 6]
 
     min = 1
     best_n = 0
@@ -26,19 +26,20 @@ def find_GB_params(X14, y14, X15, y15, X16, y16, X17, y17):
         for c in C:
             for f in max_feat:
                 for d in depth:
-                    gb = GradientBoostingClassifier(n_estimators=n, learning_rate=c, max_features=f, max_depth=d, random_state=42)
+                    gb = GradientBoostingClassifier(n_estimators=n, learning_rate=c, max_features=f, max_depth=d,
+                                                    random_state=42, verbose=2)
 
                     gb.fit(X14, y14)
-                    y_2014 = pd.DataFrame(gb.predict_proba(X14))[1]
+                    y_2014 = pd.DataFrame(gb.predict_proba(test14))[1]
 
                     gb.fit(X15, y15)
-                    y_2015 = pd.DataFrame(gb.predict_proba(X15))[1]
+                    y_2015 = pd.DataFrame(gb.predict_proba(test15))[1]
 
                     gb.fit(X16, y16)
-                    y_2016 = pd.DataFrame(gb.predict_proba(X16))[1]
+                    y_2016 = pd.DataFrame(gb.predict_proba(test16))[1]
 
                     gb.fit(X17, y17)
-                    y_2017 = pd.DataFrame(gb.predict_proba(X17))[1]
+                    y_2017 = pd.DataFrame(gb.predict_proba(test17))[1]
 
                     predi = np.append(y_2014, y_2015)
                     ctions = np.append(y_2016, y_2017)
@@ -53,7 +54,7 @@ def find_GB_params(X14, y14, X15, y15, X16, y16, X17, y17):
                         best_f = f
                         best_d = d
 
-    return best_n, best_c, best_f, best_d
+    return best_n, best_c, best_f, best_d, min
 
 
 X_train = pd.read_csv("X_train_seedordinal.csv")
@@ -98,8 +99,22 @@ X_test_2016 = X_test[X_test["Season"] == 2016]
 X_test_2017 = X_test[X_test["Season"] == 2017]
 
 # Gradient Boosting for each individual year
-n, c, f, d = find_GB_params(X_train_2014, y_train_2014, X_train_2015, y_train_2015, X_train_2016, y_train_2016, X_train_2017, y_train_2017)
-gb = GradientBoostingClassifier(n_estimators=n, max_features=f, max_depth=d, random_state=42, learning_rate=c)
+'''
+n, c, f, d, min = find_GB_params(X_train_2014, y_train_2014, X_train_2015, y_train_2015, X_train_2016, y_train_2016,
+                                 X_train_2017, y_train_2017, X_test_2014, X_test_2015, X_test_2016, X_test_2017)
+print("Best number of estimators found:", n)
+print("Best learning rate found:", c)
+print("Best max_features found:", f)
+print("Best depth found:", d)
+print("Best mean difference found ", min)
+'''
+# Best number of estimators found: 308
+# Best learning rate found: 0.009
+# Best max_features found: sqrt
+# Best depth found: 5
+# Best mean difference found  3.3636171082e-07
+# 3.3636171082e-07
+gb = GradientBoostingClassifier(n_estimators=308, max_features='sqrt', max_depth=5, random_state=42, learning_rate=0.009)
 
 gb.fit(X_train_2014, y_train_2014)
 y_pred_2014 = pd.DataFrame(gb.predict_proba(X_test_2014))[1]
@@ -136,6 +151,11 @@ predictions1 = np.append(y_pred_2014, y_pred_2015)
 predictions2 = np.append(y_pred_2016, y_pred_2017)
 predictions = np.append(predictions1, predictions2)
 y_pred = pd.Series(predictions)
+
+y_close = pd.read_csv("submission_seedordinal_logloss33.csv")
+y_close = y_close["Pred"]
+meandiff = abs((y_close.subtract(y_pred)).mean())
+print(meandiff)
 
 sub_file.insert(1, "Pred", y_pred)
 sub_file.to_csv(path_or_buf="submission_seedordinal_nobias.csv", index=False)

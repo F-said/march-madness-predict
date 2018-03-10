@@ -30,7 +30,7 @@ cal_forest = CalibratedClassifierCV(base_estimator=forest, cv='prefit')
 cal_forest.fit(X_train, y_train)
 
 ### Gradient Boosting ###
-gb = GradientBoostingClassifier(n_estimators=5000, max_features='sqrt', max_depth=5, random_state=42, learning_rate=0.01)
+gb = GradientBoostingClassifier(n_estimators=2000, max_features='sqrt', max_depth=5, random_state=42, learning_rate=0.01)
 gb.fit(X_train, y_train)
 y_pred = gb.predict(X_test)
 
