@@ -1,22 +1,37 @@
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.ensemble import GradientBoostingClassifier
 import numpy as np
-from sklearn.calibration import CalibratedClassifierCV
+from sklearn.model_selection import cross_val_score
 
 
-def find_GB_params(X14, y14, X15, y15, X16, y16, X17, y17, test14, test15, test16, test17):
-    # 760 calculations of GB
-    # This is going to take disgustingly long
-    # Use mean difference on predictions with 0.33 log loss to find best hyperparameters of gradient boosted trees
-    y_close = pd.read_csv("submission_seedordinal_logloss33.csv")
-    y_close = y_close["Pred"]
+def find_GB_params(X14, y14, X15, y15, X16, y16, X17, y17):
+    # Find best hyperparameters of gradient boosted trees using cross validation
 
-    n_est = list(range(290, 310, 1))
-    C = [0.0088, 0.009, 0.0093]
+    n_est = list(range(100, 700, 50))
+    C = [0.001, 0.005, 0.01, 0.015, 0.02, 0.025]
     max_feat = ['auto', 'sqrt']
-    depth = [4, 5, 6]
+    depth = [3, 4, 5, 6, 7, 8]
 
-    min = 1
+    gbdefault = GradientBoostingClassifier()
+    fold_size = 5
+
+    gbdefault.fit(X14, y14)
+    f1_2014 = cross_val_score(gbdefault, X14, y14, cv=fold_size, n_jobs=-1, scoring='f1').mean()
+
+    gbdefault.fit(X15, y15)
+    f1_2015 = cross_val_score(gbdefault, X15, y15, cv=fold_size, n_jobs=-1, scoring='f1').mean()
+
+    gbdefault.fit(X16, y16)
+    f1_2016 = cross_val_score(gbdefault, X16, y16, cv=fold_size, n_jobs=-1, scoring='f1').mean()
+
+    gbdefault.fit(X17, y17)
+    f1_2017 = cross_val_score(gbdefault, X17, y17, cv=fold_size, n_jobs=-1, scoring='f1').mean()
+
+    best2014 = f1_2014
+    best2015 = f1_2015
+    best2016 = f1_2016
+    best2017 = f1_2017
+
     best_n = 0
     best_c = 0
     best_f = ''
@@ -28,33 +43,30 @@ def find_GB_params(X14, y14, X15, y15, X16, y16, X17, y17, test14, test15, test1
                 for d in depth:
                     gb = GradientBoostingClassifier(n_estimators=n, learning_rate=c, max_features=f, max_depth=d,
                                                     random_state=42, verbose=2)
-
                     gb.fit(X14, y14)
-                    y_2014 = pd.DataFrame(gb.predict_proba(test14))[1]
+                    f1_2014 = cross_val_score(gbdefault, X14, y14, cv=fold_size, n_jobs=-1, scoring='f1').mean()
 
                     gb.fit(X15, y15)
-                    y_2015 = pd.DataFrame(gb.predict_proba(test15))[1]
+                    f1_2015 = cross_val_score(gbdefault, X15, y15, cv=fold_size, n_jobs=-1, scoring='f1').mean()
 
                     gb.fit(X16, y16)
-                    y_2016 = pd.DataFrame(gb.predict_proba(test16))[1]
+                    f1_2016 = cross_val_score(gbdefault, X16, y16, cv=fold_size, n_jobs=-1, scoring='f1').mean()
 
                     gb.fit(X17, y17)
-                    y_2017 = pd.DataFrame(gb.predict_proba(test17))[1]
+                    f1_2017 = cross_val_score(gbdefault, X17, y17, cv=fold_size, n_jobs=-1, scoring='f1').mean()
 
-                    predi = np.append(y_2014, y_2015)
-                    ctions = np.append(y_2016, y_2017)
-                    concat_pred = np.append(predi, ctions)
-                    full_predict = pd.Series(concat_pred)
+                    if f1_2014 >= best2014 and f1_2015 >= best2015 and f1_2016 >= best2016 and f1_2017 >= best2017:
+                        best2014 = f1_2014
+                        best2015 = f1_2015
+                        best2016 = f1_2016
+                        best2017 = f1_2017
 
-                    meandiff = abs((y_close.subtract(full_predict)).mean())
-                    if meandiff < min:
-                        min = meandiff
                         best_n = n
                         best_c = c
                         best_f = f
                         best_d = d
 
-    return best_n, best_c, best_f, best_d, min
+    return best_n, best_c, best_f, best_d, best2014, best2015, best2016, best2017
 
 
 X_train = pd.read_csv("X_train_seedordinal.csv")
@@ -100,21 +112,28 @@ X_test_2017 = X_test[X_test["Season"] == 2017]
 
 # Gradient Boosting for each individual year
 '''
-n, c, f, d, min = find_GB_params(X_train_2014, y_train_2014, X_train_2015, y_train_2015, X_train_2016, y_train_2016,
-                                 X_train_2017, y_train_2017, X_test_2014, X_test_2015, X_test_2016, X_test_2017)
+n, c, f, d, bestacc2014, bestacc2015, bestacc2016, bestacc2017 = find_GB_params(X_train_2014, y_train_2014,
+                                                                                X_train_2015, y_train_2015,
+                                                                                X_train_2016, y_train_2016,
+                                                                                X_train_2017, y_train_2017)
 print("Best number of estimators found:", n)
 print("Best learning rate found:", c)
 print("Best max_features found:", f)
 print("Best depth found:", d)
-print("Best mean difference found ", min)
+print("Best accuracy found 2014: ", bestacc2014)
+print("Best accuracy found 2015: ", bestacc2015)
+print("Best accuracy found 2016: ", bestacc2016)
+print("Best accuracy found 2017: ", bestacc2017)
 '''
-# Best number of estimators found: 308
-# Best learning rate found: 0.009
+# Best number of estimators found: 650
+# Best learning rate found: 0.025
 # Best max_features found: sqrt
-# Best depth found: 5
-# Best mean difference found  3.3636171082e-07
-# 3.3636171082e-07
-gb = GradientBoostingClassifier(n_estimators=308, max_features='sqrt', max_depth=5, random_state=42, learning_rate=0.009)
+# Best depth found: 8
+# Best accuracy found 2014:  0.662636118241
+# Best accuracy found 2015:  0.678676998677
+# Best accuracy found 2016:  0.692299657834
+# Best accuracy found 2017:  0.65668215962
+gb = GradientBoostingClassifier(n_estimators=200, max_features='sqrt', max_depth=7, random_state=42, learning_rate=0.025)
 
 gb.fit(X_train_2014, y_train_2014)
 y_pred_2014 = pd.DataFrame(gb.predict_proba(X_test_2014))[1]
@@ -128,34 +147,11 @@ y_pred_2016 = pd.DataFrame(gb.predict_proba(X_test_2016))[1]
 gb.fit(X_train_2017, y_train_2017)
 y_pred_2017 = pd.DataFrame(gb.predict_proba(X_test_2017))[1]
 
-# Random Forest for each individual year
-forest = RandomForestClassifier(n_jobs=-1, n_estimators=250, criterion='gini', max_features='sqrt', max_depth=5,
-                                random_state=42, oob_score=True)
-cal_forest = CalibratedClassifierCV(base_estimator=forest)
-cal_forest.fit(X_train, y_train)
-
-cal_forest.fit(X_train_2014, y_train_2014)
-y_pred_2014_forest = pd.DataFrame(cal_forest.predict_proba(X_test_2014))[1]
-
-cal_forest.fit(X_train_2015, y_train_2015)
-y_pred_2015_forest = pd.DataFrame(cal_forest.predict_proba(X_test_2015))[1]
-
-cal_forest.fit(X_train_2016, y_train_2016)
-y_pred_2016_forest = pd.DataFrame(cal_forest.predict_proba(X_test_2016))[1]
-
-cal_forest.fit(X_train_2017, y_train_2017)
-y_pred_2017_forest = pd.DataFrame(cal_forest.predict_proba(X_test_2017))[1]
-
 # Submit
 predictions1 = np.append(y_pred_2014, y_pred_2015)
 predictions2 = np.append(y_pred_2016, y_pred_2017)
 predictions = np.append(predictions1, predictions2)
 y_pred = pd.Series(predictions)
-
-y_close = pd.read_csv("submission_seedordinal_logloss33.csv")
-y_close = y_close["Pred"]
-meandiff = abs((y_close.subtract(y_pred)).mean())
-print(meandiff)
 
 sub_file.insert(1, "Pred", y_pred)
 sub_file.to_csv(path_or_buf="submission_seedordinal_nobias.csv", index=False)
