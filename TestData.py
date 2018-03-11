@@ -2,6 +2,7 @@ import pandas as pd
 
 path = "/Users/farukhsaidmuratov/PycharmProjects/MarchMadness/"
 Ordinals = pd.read_csv(path + "Ordinals_new.csv")
+# Change cv name to SampleSubmissionStage1 to predict data from this years Stage1
 sample_sub = pd.read_csv(path + "SampleSubmissionStage1.csv").drop(labels="Pred", axis=1)
 
 len_init = [1 for x in range(len(sample_sub))]
@@ -55,5 +56,5 @@ for index, row in sample_sub.iterrows():
     Test_data["Seed" + Diff].iloc[index] = first_seed.iloc[0] - second_seed.iloc[0]
 
 # Create CSV File so you don't have to load every time
-Test_data.to_csv(path_or_buf="X_test_seedordinal.csv", index=False)
+Test_data.to_csv(path_or_buf="X_test_seedordinal_2017.csv", index=False)
 
