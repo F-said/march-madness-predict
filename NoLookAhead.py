@@ -6,8 +6,6 @@ from sklearn.neural_network import MLPClassifier
 
 
 def find_GB_params(X17, y17, Xt17, yt17):
-    # Find best hyperparameters of gradient boosted trees using cross validation
-
     n_est = list(range(100, 750, 50))
     C = [0.0001, 0.001, 0.01, 0.1, 1]
     max_feat = ['auto', 'sqrt']
@@ -116,7 +114,7 @@ submission2016_selected = pd.read_csv("X_test_seedordinal_2016.csv").drop(labels
     drop(labels="Season", axis=1).drop(labels="WOLDiff", axis=1).drop(labels="SAGDiff", axis=1).drop(labels="RPIDiff", axis=1).\
     drop(labels="POMDiff", axis=1).drop(labels="MORDiff", axis=1).drop(labels="DOLDiff", axis=1)
 
-path = "/Users/farukhsaidmuratov/PycharmProjects/MarchMadness/"
+path = "/Users/farukhsaidmuratov/PycharmProjects/MarchMadness/2016/"
 sub_file = pd.read_csv(path + "SampleSubmission2016.csv").drop(labels="Pred", axis=1)
 
 # Make sure no test samples are in train set
