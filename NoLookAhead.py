@@ -1,5 +1,6 @@
 import pandas as pd
-from sklearn.ensemble import GradientBoostingClassifier
+import numpy as np
+from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
 from sklearn.metrics import log_loss, accuracy_score
 from sklearn.neural_network import MLPClassifier
 
@@ -7,17 +8,15 @@ from sklearn.neural_network import MLPClassifier
 def find_GB_params(X17, y17, Xt17, yt17):
     # Find best hyperparameters of gradient boosted trees using cross validation
 
-    n_est = list(range(100, 150, 5))
-    C = [0.1]
-    max_feat = ['sqrt']
-    depth = [4]
+    n_est = list(range(100, 750, 50))
+    C = [0.0001, 0.001, 0.01, 0.1, 1]
+    max_feat = ['auto', 'sqrt']
+    depth = [3, 4, 5, 6, 7, 8]
 
     gbdefault = GradientBoostingClassifier()
     gbdefault.fit(X17, y17)
-    y_predict = gbdefault.predict(Xt17)
-
-    best2017 = accuracy_score(yt17, y_predict)
-    loss = log_loss(yt17, gbdefault.predict_proba(Xt17))
+    y_predict = pd.DataFrame(gbdefault.predict_proba(Xt17)).drop(labels=0, axis=1)
+    bestloss = log_loss(yt17, y_predict)
 
     best_n = 0
     best_c = 0
@@ -31,34 +30,31 @@ def find_GB_params(X17, y17, Xt17, yt17):
                     gb = GradientBoostingClassifier(n_estimators=n, learning_rate=c, max_features=f, max_depth=d,
                                                     random_state=42, verbose=2)
                     gb.fit(X17, y17)
-                    y_predict = gb.predict(Xt17)
-                    acc_2017 = accuracy_score(yt17, y_predict)
+                    y_pred = pd.DataFrame(gb.predict_proba(Xt17)).drop(labels=0, axis=1)
+                    loss = log_loss(yt17, y_pred)
 
-                    if acc_2017 >= best2017:
-                        best2017 = acc_2017
-                        loss = log_loss(yt17, gb.predict_proba(Xt17))
-
+                    if loss <= bestloss:
+                        bestloss = loss
                         best_n = n
                         best_c = c
                         best_f = f
                         best_d = d
 
-    return best_n, best_c, best_f, best_d, best2017, loss
+    return best_n, best_c, best_f, best_d, bestloss
 
 
 def find_NN_params(X17, y17, Xt17, yt17):
-    hidden_layersize = [(100,), (100, 2), (100, 3), (100,), (200, 2), (200, 3), (300,), (300, 2), (300, 3)]
-    activation = ['identity', 'logistic', 'tanh', 'relu']
+    hidden_layersize = [(100,), (100, 2), (100, 3), (100, 4), (200,), (200, 2), (200, 3), (200, 4), (300,), (300, 2),
+                        (300, 3), (300, 4), (400,), (400, 2), (400, 3), (400, 4)]
+    activation = ['logistic']
     solver = ['lbfgs', 'sgd', 'adam']
-    alpha = [0.0001, 0.001, 0.01, 0.1]
+    alpha = [0.00001, 0.0001, 0.001, 0.01]
     learnrate = ['constant', 'invscaling', 'adaptive']
 
     nndefault = MLPClassifier()
     nndefault.fit(X17, y17)
-    y_predict = nndefault.predict(Xt17)
-
-    best2017 = accuracy_score(yt17, y_predict)
-    loss = log_loss(yt17, nndefault.predict_proba(Xt17))
+    y_predict = pd.DataFrame(nndefault.predict_proba(Xt17)).drop(labels=0, axis=1)
+    bestloss = log_loss(yt17, y_predict)
 
     best_hidden = (100,)
     best_acti = ''
@@ -74,20 +70,20 @@ def find_NN_params(X17, y17, Xt17, yt17):
                         nn = MLPClassifier(hidden_layer_sizes=h, activation=a, solver=s, alpha=al, learning_rate=l,
                                            verbose=2)
                         nn.fit(X17, y17)
-                        y_predict = nn.predict(Xt17)
-                        acc_2017 = accuracy_score(yt17, y_predict)
+                        y_pred_NN = pd.DataFrame(nn.predict_proba(Xt17)).drop(labels=0, axis=1)
 
-                        if acc_2017 >= best2017:
-                            best2017 = acc_2017
-                            loss = log_loss(yt17, gb.predict_proba(Xt17))
+                        if y_pred_NN is not np.NaN:
+                            loss = log_loss(yt17, y_pred_NN)
 
-                            best_hidden = h
-                            best_acti = a
-                            best_solv = s
-                            best_alpha = al
-                            best_learn = l
+                            if loss <= bestloss:
+                                bestloss = loss
+                                best_hidden = h
+                                best_acti = a
+                                best_solv = s
+                                best_alpha = al
+                                best_learn = l
 
-    return best_hidden, best_acti, best_solv, best_alpha, best_learn, best2017, loss
+    return best_hidden, best_acti, best_solv, best_alpha, best_learn, bestloss
 
 
 X_train = pd.read_csv("X_train_seedordinal.csv")
@@ -120,40 +116,52 @@ print("Number of test samples in train samples:", count)
 
 # Gradient Boosted Trees Classifier
 '''
-n, c, f, d, bestacc2017, loss = find_GB_params(X_train_2017, y_train_2017, X_test_2017, y_test_2017)
+n, c, f, d, bestloss = find_GB_params(X_train_2017, y_train_2017, X_test_2017, y_test_2017)
 print("Best number of estimators found:", n)
 print("Best learning rate found:", c)
 print("Best max_features found:", f)
 print("Best depth found:", d)
-print("Best accuracy 2017: ", bestacc2017)
-print("log loss: ", loss)
+print("log loss: ", bestloss)
 '''
-# Best number of estimators found: 100
-# Best learning rate found: 0.1
+# Best number of estimators found: 550
+# Best learning rate found: 0.01
 # Best max_features found: sqrt
-# Best depth found: 4
-# Best accuracy 2017:  0.761194029851
-# log loss:  0.561643826124
-gb = GradientBoostingClassifier(n_estimators=100, max_features='sqrt', max_depth=4, random_state=42, learning_rate=0.1)
-gb.fit(X_train, y_train)
+# Best depth found: 3
+# log loss:  0.532468522173
+gb = GradientBoostingClassifier(n_estimators=550, max_features='sqrt', max_depth=3, random_state=42, learning_rate=0.01)
+gb.fit(X_train_2017, y_train_2017)
 y_pred_2017 = pd.DataFrame(gb.predict_proba(submission2017)).drop(labels=0, axis=1)
+y_pred = gb.predict(X_test_2017)
+print("Accuracy GB: ", accuracy_score(y_test_2017, y_pred))
 
 # MLP Classifier
-h, a, s, al, l, bestacc2017, nnloss = find_NN_params(X_train_2017, y_train_2017, X_test_2017, y_test_2017)
+'''
+h, a, s, al, l, nnloss = find_NN_params(X_train_2017, y_train_2017, X_test_2017, y_test_2017)
 print("Best hidden layer: ", h)
 print("Best activation: ", a)
 print("Best solver: ", s)
 print("Best alpha: ", al)
 print("Best learner: ", l)
 print("log loss: ", nnloss)
-print("Score for nn is : ", bestacc2017)
-
-nn = MLPClassifier(hidden_layer_sizes=h, activation=a, solver=s, alpha=al, learning_rate=l, random_state=42)
+'''
+# Best hidden layer:  (200,)
+# Best activation:  logistic
+# Best solver:  lbfgs
+# Best alpha:  1e-05
+# Best learner:  constant
+# log loss:  0.49194970976
+nn = MLPClassifier(hidden_layer_sizes=(200,), activation='logistic', solver='lbfgs', alpha=1e-05, learning_rate='constant',
+                   random_state=42)
 nn.fit(X_train_2017, y_train_2017)
-nn_predict = nn.predict(X_test_2017)
 y_pred_2017_nn = pd.DataFrame(nn.predict_proba(submission2017)).drop(labels=0, axis=1)
+y_pred_NN = nn.predict(X_test_2017)
+print("Accuracy NN: ", accuracy_score(y_test_2017, y_pred_NN))
 
 # Submit
-sub_file.insert(1, "Pred", y_pred_2017)
+sub_file.insert(1, "Pred", y_pred_2017_nn)
 sub_file.to_csv(path_or_buf="submission_seedordinal_nobias2017_nn.csv", index=False)
+
+sub_file = sub_file.drop(labels="Pred", axis=1)
+sub_file.insert(1, "Pred", y_pred_2017)
+sub_file.to_csv(path_or_buf="submission_seedordinal_nobias2017_gb.csv", index=False)
 

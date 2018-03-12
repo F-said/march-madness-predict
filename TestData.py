@@ -56,5 +56,5 @@ for index, row in sample_sub.iterrows():
     Test_data["Seed" + Diff].iloc[index] = first_seed.iloc[0] - second_seed.iloc[0]
 
 # Create CSV File so you don't have to load every time
-Test_data.to_csv(path_or_buf="X_test_seedordinal_2017.csv", index=False)
+Test_data.to_csv(path_or_buf="X_test_seedordinal.csv", index=False)
 
