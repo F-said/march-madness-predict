@@ -12,7 +12,7 @@ Seeds = Seeds[Seeds["Season"] == 2018]
 Seeds["Seed"] = Seeds["Seed"].apply(lambda s: int(s[1:3]))
 
 # Import ordinal rank
-Ordinals = pd.read_csv(path + "MasseyOrdinals_2018_133_only_43Systems.csv")
+Ordinals = pd.read_csv(path + "MasseyOrdinals_2018_133_only_53Systems.csv")
 Ordinals_old = pd.read_csv(path + "Ordinals_new.csv")
 Ordinal_labels = list(Ordinals_old.SystemName.unique())
 
