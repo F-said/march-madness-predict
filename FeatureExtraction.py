@@ -40,7 +40,7 @@ for index, row in NCAADetailed.iterrows():
 Ordinals_new.to_csv(path_or_buf="Ordinals_new.csv", index=False)
 '''
 
-Ordinals_new = pd.read_csv(path + "Ordinals_new.csv")
+Ordinals_new = pd.read_csv("/Users/farukhsaidmuratov/PycharmProjects/MarchMadness/2018/Ordinals_new.csv")
 features = list(Ordinals_new.SystemName.unique())
 
 # Create Train and Test Data
