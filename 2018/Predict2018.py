@@ -44,19 +44,11 @@ sub_file.insert(1, "Pred", y_pred)
 sub_file.to_csv(path_or_buf="submission2018gb.csv", index=False)
 
 sub_file = sub_file.drop(labels="Pred", axis=1)
-sub_file.insert(1, "Pred", y_pred_selected)
-sub_file.to_csv(path_or_buf="submission2018gb_selected.csv", index=False)
-
-sub_file = sub_file.drop(labels="Pred", axis=1)
 sub_file.insert(1, "Pred", y_pred_nn)
 sub_file.to_csv(path_or_buf="submission2018nn.csv", index=False)
 
-sub_file = sub_file.drop(labels="Pred", axis=1)
-sub_file.insert(1, "Pred", y_pred_nnselected)
-sub_file.to_csv(path_or_buf="submission2018nn_selected.csv", index=False)
-
 '''
 Two models:
-GB with Selected features
+GB with all features
 Neural Network with all features 
 '''
