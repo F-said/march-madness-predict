@@ -170,6 +170,6 @@ Accuracy GB no seed:  0.731343283582
 Accuracy NN no seed:  0.716417910448
 
 Log Loss for 2017
-GB: 0.506971
-NN: 0.531221
+GB no seed: 0.506971
+NN no seed: 0.531221
 '''

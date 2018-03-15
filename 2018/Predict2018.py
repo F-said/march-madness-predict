@@ -40,6 +40,7 @@ nnselected.fit(X_train_selected, y_train)
 y_pred_nnselected = pd.DataFrame(nnselected.predict_proba(submission2018_selected)).drop(labels=0, axis=1)
 
 # Submit
+
 sub_file.insert(1, "Pred", y_pred)
 sub_file.to_csv(path_or_buf="submission2018gb.csv", index=False)
 
