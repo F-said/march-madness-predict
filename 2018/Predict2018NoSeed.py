@@ -1,11 +1,25 @@
 import pandas as pd
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.neural_network import MLPClassifier
+import matplotlib.pyplot as plt
 
 X_train = pd.read_csv("X_train_seedordinal.csv").drop(labels="Team1", axis=1).drop(labels="Team2", axis=1).\
     drop(labels="Season", axis=1).drop(labels="SeedDiff", axis=1)
 y_train = pd.read_csv("y_train_seedordinal.csv")
 y_train = y_train["Result"]
+
+labels = list(X_train)
+
+for x in labels:
+    for y in labels:
+        if x is y:
+            continue
+        plt.scatter(X_train[x], X_train[y], c=["red", "blue"])
+        plt.xlabel(x)
+        plt.ylabel(y)
+        plt.legend(labels=["lost", "won"])
+        plt.title(x + " vs. " + y)
+        plt.show()
 
 submission2018 = pd.read_csv("X_test2018.csv").drop(labels="Team1", axis=1).drop(labels="Team2", axis=1).\
     drop(labels="Season", axis=1).drop(labels="SeedDiff", axis=1)
