@@ -21,6 +21,7 @@ Type 'q()' to quit R.
 
 [History restored from /Users/farukhsaidmuratov/.Rapp.history]
 
+> // Cool lib provided by Zach Mayer https://github.com/zachmayer/kaggleNCAA
 > library('kaggleNCAA')
 > dat <- parseBracket('/Users/farukhsaidmuratov/PycharmProjects/MarchMadness/2018/submission2018gb.csv', w=0)
 > sim <- simTourney(dat, 1000, progress=TRUE)
