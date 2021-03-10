@@ -72,7 +72,7 @@ X_test = X_train[X_train["Season"] == 2019].drop(labels="Season", axis=1)
 y_test = y_train[X_train["Season"] == 2019]
 
 # Replace with stage2 submission file when ready 
-# submission2017 = pd.read_csv().drop(labels="Team1", axis=1).drop(labels="Team2", axis=1).drop(labels="Season", axis=1)
+real_test = pd.read_csv(year+"\\form_data\X_test_seedordinal.csv").drop(labels="Team1", axis=1).drop(labels="Team2", axis=1).drop(labels="Season", axis=1)
 sub_file = pd.read_csv(year + "\\unform_data\MSampleSubmissionStage1.csv").drop(labels="Pred", axis=1)
 
 # Make sure no test samples are in train set
@@ -84,7 +84,7 @@ except ValueError as e:
     exit(str(e))
 
 # Gradient Boosted Trees Classifier
-n, c, f, d, bestloss = find_GB_params(X_train_2017, y_train_2017, X_test_2017, y_test_2017)
+n, c, f, d, bestloss = find_GB_params(X_train, y_train, X_test, y_test)
 print("Best number of estimators found:", n)
 print("Best learning rate found:", c)
 print("Best max_features found:", f)
@@ -96,12 +96,12 @@ print("log loss: ", bestloss)
 # Best depth found: 3
 # log loss:  0.532700137888
 # Accuracy GB:  0.731343283582
-gb = GradientBoostingClassifier(n_estimators=400, max_features='sqrt', max_depth=3, random_state=42, learning_rate=0.01)
+gb = GradientBoostingClassifier(n_estimators=n, max_features=f, max_depth=d, random_state=42, learning_rate=c)
 gb.fit(X_train, y_train)
-y_pred_2017 = pd.DataFrame(gb.predict_proba(sub_file)).drop(labels=0, axis=1)
 y_pred = gb.predict(X_test)
 print("Accuracy GB: ", accuracy_score(y_test, y_pred))
 
 # Submit
+y_pred = pd.DataFrame(gb.predict_proba(real_test)).drop(labels=0, axis=1)
 sub_file.insert(1, "Pred", y_pred)
 sub_file.to_csv(path_or_buf=year+"\\predictions\submission_seedordinal_gb.csv", index=False)
