@@ -58,18 +58,17 @@ def count_intersection(x_train, x_test) -> int:
 year = "2021"
 
 # pull training data 
-X_train = pd.read_csv(year+"\\form_data\X_train_seedordinal.csv").\
-    drop(labels="Team1", axis=1).drop(labels="Team2", axis=1)
-y_train = pd.read_csv(year+"\\form_data\y_train_seedordinal.csv")
-y_train = y_train["Result"]
+x = pd.read_csv(year+"\\form_data\X_train_seedordinal.csv")
+y = pd.read_csv(year+"\\form_data\y_train_seedordinal.csv")
+y = y["Result"]
 
 # Remove test set results from train set to prevent look-ahead bias 
-X_train = X_train[X_train["Season"] < 2019].drop(labels="Season", axis=1)
-y_train = y_train[X_train["Season"] < 2019]
+X_train = x[x["Season"] < 2019]
+y_train = y[x["Season"] < 2019]
 
 # Create test set 
-X_test = X_train[X_train["Season"] == 2019].drop(labels="Season", axis=1)
-y_test = y_train[X_train["Season"] == 2019]
+X_test = x[x["Season"] == 2019]
+y_test = y[x["Season"] == 2019]
 
 # Replace with stage2 submission file when ready 
 real_test = pd.read_csv(year+"\\form_data\X_test_seedordinal.csv").drop(labels="Team1", axis=1).drop(labels="Team2", axis=1).drop(labels="Season", axis=1)
@@ -83,20 +82,28 @@ try:
 except ValueError as e:
     exit(str(e))
 
+# Drop season column and teams once finished with comparison 
+X_train = X_train.drop(labels="Season", axis=1).\
+    drop(labels="Team1", axis=1).drop(labels="Team2", axis=1)
+X_test = X_test.drop(labels="Season", axis=1).\
+    drop(labels="Team1", axis=1).drop(labels="Team2", axis=1)
+
 # Gradient Boosted Trees Classifier
-n, c, f, d, bestloss = find_GB_params(X_train, y_train, X_test, y_test)
+# n, c, f, d, bestloss = find_GB_params(X_train, y_train, X_test, y_test)
+'''
 print("Best number of estimators found:", n)
 print("Best learning rate found:", c)
 print("Best max_features found:", f)
 print("Best depth found:", d)
 print("log loss: ", bestloss)
-# Best number of estimators found: 400
-# Best learning rate found: 0.01
+'''
+# Best number of estimators found: 100
+# Best learning rate found: 0.1
 # Best max_features found: sqrt
-# Best depth found: 3
-# log loss:  0.532700137888
-# Accuracy GB:  0.731343283582
-gb = GradientBoostingClassifier(n_estimators=n, max_features=f, max_depth=d, random_state=42, learning_rate=c)
+# Best depth found: 4
+# log loss:  0.506502716020532
+# Accuracy GB:  0.6865671641791045
+gb = GradientBoostingClassifier(n_estimators=100, max_features="sqrt", max_depth=4, random_state=42, learning_rate=0.1)
 gb.fit(X_train, y_train)
 y_pred = gb.predict(X_test)
 print("Accuracy GB: ", accuracy_score(y_test, y_pred))
@@ -105,3 +112,4 @@ print("Accuracy GB: ", accuracy_score(y_test, y_pred))
 y_pred = pd.DataFrame(gb.predict_proba(real_test)).drop(labels=0, axis=1)
 sub_file.insert(1, "Pred", y_pred)
 sub_file.to_csv(path_or_buf=year+"\\predictions\submission_seedordinal_gb.csv", index=False)
+
