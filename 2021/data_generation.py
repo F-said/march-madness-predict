@@ -15,11 +15,11 @@ Seeds = Seeds[Seeds["Season"] >= 2003]
 Seeds["Seed"] = Seeds["Seed"].apply(lambda s: int(s[1:3]))
 
 # Create ordinals_new 
-createOrdinals(year)
-Ordinals_new = pd.read_csv(year+"\\form_data\Ordinals_new.csv")
+feat.createOrdinals(year)
+feat.Ordinals_new = pd.read_csv(year+"\\form_data\Ordinals_new.csv")
 
 '''Creation Training & Testing Data'''
 # Test
-target = initTestData(year) 
+target = feat.initTestData(year) 
 # Train
-initTrainData(year, target)
+feat.initTrainData(year, target)
