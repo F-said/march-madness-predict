@@ -13,4 +13,4 @@ def select_feats(year: str, x_train, y_train) -> None:
     selector.fit(x_train, y_train)
 
     X_train_selected = pd.DataFrame(selector.transform(x_train))
-    X_train_selected.to_csv(path_or_buf=year + "\\form_data\X_train_seedordinal_selected.csv", index=False)
+    X_train_selected.to_csv(path_or_buf=year + "form_data\X_train_seedordinal_selected.csv", index=False)

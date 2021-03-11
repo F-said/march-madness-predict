@@ -32,7 +32,7 @@ def createOrdinals(ncaa_data, ordinals) -> None:
                 features.remove(f_name)
 
     # Create CSV File so you don't have to load every time
-    Ordinals_new.to_csv(path_or_buf="\\form_data\Ordinals_new.csv", index=False)
+    Ordinals_new.to_csv(path_or_buf="form_data\Ordinals_new.csv", index=False)
 
 def initTrainData(ncaa_data, ordinals, seeds) -> None:
     """
@@ -97,8 +97,8 @@ def initTrainData(ncaa_data, ordinals, seeds) -> None:
         Train_data["Seed" + Diff].iloc[index] = first_seed.iloc[0] - second_seed.iloc[0]
 
     # Create CSV File so you don't have to load every time
-    Train_data.to_csv(path_or_buf="\\form_data\X_train_seedordinal.csv", index=False)
-    Target_data.to_csv(path_or_buf="\\form_data\y_train_seedordinal.csv", index=False)
+    Train_data.to_csv(path_or_buf="form_data\X_train_seedordinal.csv", index=False)
+    Target_data.to_csv(path_or_buf="form_data\y_train_seedordinal.csv", index=False)
 
 def gen_test_data(ordinals, seed, sub_file) -> None:
     """
@@ -153,4 +153,4 @@ def gen_test_data(ordinals, seed, sub_file) -> None:
         Test_data["Seed" + Diff].iloc[index] = first_seed.iloc[0] - second_seed.iloc[0]
 
     # Create CSV File so you don't have to load every time
-    Test_data.to_csv(path_or_buf="\\form_data\X_test_seedordinal.csv", index=False)
+    Test_data.to_csv(path_or_buf="form_data\X_test_seedordinal.csv", index=False)

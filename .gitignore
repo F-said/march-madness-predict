@@ -1,4 +1,8 @@
+# Ignore system files 
 .vscode 
 .DS_STORE 
+*/__pycache__/
+
+# Ignore archived data & unformatted data
 archive/
 unform_data/*.csv 
