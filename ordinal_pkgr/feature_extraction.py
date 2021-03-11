@@ -3,21 +3,18 @@ import numpy as np
 
 def createOrdinals(year: str, ncaa_data, ordinals) -> None: 
     """
-    Creates a formatted datastruct for massey ordinals that reapper after every year of 2003
+    Creates a formatted datastruct for massey ordinals that annually reapper after every year of 2003
     
-    @ precondtions: file named "fn" exists; direction "year" exists
-    @ postcondition: file created in "year" directory that contains...  
+    @ precondtions: directory "year" exists
+    @ postcondition: file created in "year" directory that contains massey ordinals that make an appearance from 2003-2019
     """
-    # Get recorded ordinals right before March Madness 
-    ordinals = ordinals[(ordinals["RankingDayNum"] == 133)]
+    # Get recorded ordinals right before March Madness after 2003
+    Ordinals_new = ordinals[(ordinals["RankingDayNum"] == 133) & (ordinals["Season"] >= 2003)]
 
     # Get all unique ranking systems
-    features = list(ordinals.SystemName.unique())
+    features = list(Ordinals_new.SystemName.unique())
     # Get all unique years 
     years = list(ncaa_data.Season.unique())
-
-    # Keep only the rating system that contains all teams from NCAA tourneys from 2003
-    Ordinals_new = ordinals[ordinals["Season"] >= 2003]
 
     for index, row in ncaa_data.iterrows():
         # Create a list of unique losing and unique winning teams 
@@ -29,7 +26,7 @@ def createOrdinals(year: str, ncaa_data, ordinals) -> None:
         for f_name in features:
             Ordinal_addend = ordinals[(ordinals["SystemName"] == f_name) & (ordinals["Season"] == row["Season"])]
             compare_set = set(Ordinal_addend.TeamID)
-            # I wish I had better documentation
+
             if not(set_teams.issubset(compare_set)):
                 Ordinals_new = Ordinals_new[Ordinals_new.SystemName.str.contains(f_name) == False]
                 features.remove(f_name)
@@ -105,6 +102,8 @@ def initTrainData(year: str, ncaa_data, ordinals, seeds) -> None:
 
 def gen_test_data(yearStr: str, ordinals, seed, sub_file) -> None:
     """
+    Creae test data based off of submission file 
+
     @ postcondtion: generate training data set of specified match-ups (that happened) already from 2015-2019.
     Columns match those of train_data 
     """
@@ -131,9 +130,6 @@ def gen_test_data(yearStr: str, ordinals, seed, sub_file) -> None:
         Test_data["Season"].iloc[index] = year
         Test_data["Team1"].iloc[index] = team1
         Test_data["Team2"].iloc[index] = team2
-
-        # TODO: Consider, in the test data you get the AVERAGE of ordinal data, but in the TRAIN data you get the
-        # last recorded massey ordinal. This is probably bad data analysis! or maybe bad documentation 
 
         # For all features, find all stats of both team1 and team2. Collect all stats and average them for that season,
         # feature, and team. Find the difference between the two team averages. That will be the difference feature
