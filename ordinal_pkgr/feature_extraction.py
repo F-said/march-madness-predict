@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-def createOrdinals(year: str, ncaa_data, ordinals) -> None: 
+def createOrdinals(ncaa_data, ordinals) -> None: 
     """
     Creates a formatted datastruct for massey ordinals that annually reapper after every year of 2003
     
@@ -32,9 +32,9 @@ def createOrdinals(year: str, ncaa_data, ordinals) -> None:
                 features.remove(f_name)
 
     # Create CSV File so you don't have to load every time
-    Ordinals_new.to_csv(path_or_buf=year+"\\form_data\Ordinals_new.csv", index=False)
+    Ordinals_new.to_csv(path_or_buf="\\form_data\Ordinals_new.csv", index=False)
 
-def initTrainData(year: str, ncaa_data, ordinals, seeds) -> None:
+def initTrainData(ncaa_data, ordinals, seeds) -> None:
     """
     Creates a formatted training data. Training data contains the difference between 
     seeds and the difference between all valid ordinal rankings
@@ -97,10 +97,10 @@ def initTrainData(year: str, ncaa_data, ordinals, seeds) -> None:
         Train_data["Seed" + Diff].iloc[index] = first_seed.iloc[0] - second_seed.iloc[0]
 
     # Create CSV File so you don't have to load every time
-    Train_data.to_csv(path_or_buf=year+"\\form_data\X_train_seedordinal.csv", index=False)
-    Target_data.to_csv(path_or_buf=year+"\\form_data\y_train_seedordinal.csv", index=False)
+    Train_data.to_csv(path_or_buf="\\form_data\X_train_seedordinal.csv", index=False)
+    Target_data.to_csv(path_or_buf="\\form_data\y_train_seedordinal.csv", index=False)
 
-def gen_test_data(yearStr: str, ordinals, seed, sub_file) -> None:
+def gen_test_data(ordinals, seed, sub_file) -> None:
     """
     Creae test data based off of submission file 
 
@@ -153,30 +153,4 @@ def gen_test_data(yearStr: str, ordinals, seed, sub_file) -> None:
         Test_data["Seed" + Diff].iloc[index] = first_seed.iloc[0] - second_seed.iloc[0]
 
     # Create CSV File so you don't have to load every time
-    Test_data.to_csv(path_or_buf= yearStr +"\\form_data\X_test_seedordinal.csv", index=False)
-
-'''
-year = "2021"
-
-# Import data-sets
-# Import data regarding team NCAA stats
-NCAADetailed = pd.read_csv(year + "\\unform_data\MNCAATourneyDetailedResults.csv").drop(labels="DayNum", axis=1)
-# Import team seeds
-Seeds = pd.read_csv(year + "\\unform_data\MNCAATourneySeeds.csv")
-# Drop rows where season is before 2003, since Detailed Results start at 2003.
-Seeds = Seeds[Seeds["Season"] >= 2003]
-# We only care about seed ranking, so take off region
-Seeds["Seed"] = Seeds["Seed"].apply(lambda s: int(s[1:3]))
-# Import unformatted ordinals 
-ordinals_old = pd.read_csv(year + "\\unform_data\MMasseyOrdinals.csv")
-# Import sample sub
-sample_sub = pd.read_csv(year + "\\unform_data\MSampleSubmissionStage1.csv").drop(labels="Pred", axis=1)
-
-# Create ordinals_new 
-createOrdinals(year, NCAADetailed, ordinals_old)
-ordinals = pd.read_csv(year + "\\form_data\Ordinals_new.csv")
-# Generate Training Data
-initTrainData(year, NCAADetailed, ordinals, Seeds)
-# Generate Test Data
-gen_test_data(year, ordinals, Seeds, sample_sub)
-'''
+    Test_data.to_csv(path_or_buf="\\form_data\X_test_seedordinal.csv", index=False)
