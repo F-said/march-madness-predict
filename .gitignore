@@ -1,0 +1,12 @@
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
+
+ordinal_pkgr/
+unform_data/
+archive/
+
+.vscode
+DS_STORE
