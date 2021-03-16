@@ -18,12 +18,11 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: March Machine Learning  
+title: March Machine Learning Madness 
 email: f.saidmur@gmail.com
 description:
   Predicting basketball performance 
 baseurl: "" # the subpath of your site, e.g. /blog
-logo: "images/header-1.jpg"
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: FarukhS6
 github_username:  F-said
