@@ -27,10 +27,9 @@ twitter_username: FarukhS6
 github_username:  F-said
 
 # Build settings
-remote_theme: pages-themes/cayman
+theme: jekyll-theme-cayman
 plugins:
   - jekyll-feed
-  - jekyll-include-cache
 
 # Exclude from processing.
 # The following items will not be processed, by default.
