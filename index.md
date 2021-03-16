@@ -1,37 +1,50 @@
-## Welcome to GitHub Pages
+---
+# Feel free to add content and custom Front Matter to this file.
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
-You can use the [editor on GitHub](https://github.com/F-said/MarchMadness/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+layout: default
+---
+In Anton Chekhov's 1894 short story, "The Student", Ivan Velikopolsky is heading home
+  during a cold March evening. He just left from an encounter with a friend, Vasilisa, who began to cry 
+  bitterly when he told her the Biblical story about Peter's betrayal that occured 1,900 years ago.
+  
+  And in that moment, he realized that it wasn't the way he told the story that moved her,
+  but rather the guilt that Peter himself felt that brought forward this emotion from Vasilisa.
+  
+  To the dead trees of the Russian winter, the clerical student said aloud,
+  
+  'the past... is linked with the present by an unbroken chain of events flowing one out of another'
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+  "... it seemed to him that he had just seen both ends of that chain; that when he touched one end the
+  other quivered."
 
-### Markdown
+  This chain that Chekhov wrote of is spoken about by numerous Philisophers and Mathematicians throughout history.
+  And most famously, by the French father of statistics, Pierre Simon de-Laplace.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+  He wrote, 
 
-```markdown
-Syntax highlighted code block
+  "Present events are connected with preceding ones by a tie based upon the evident principle that a thing cannot occur
+  without a cause which produces it."
 
-# Header 1
-## Header 2
-### Header 3
+  He further postulated that if there was such a being that knew the present state of every single granularity of the Univerise, atoms,
+  then this being would be able to perfectly predict the future and retrace the past with extreme accuracy.
 
-- Bulleted
-- List
+  It is only appropriate then that field of computational statistical learning emerged as a way to predict outcome on historical data. This has made 
+  some exciting developments, like for example image-classification, self-driving cars, and netflix recommendations. 
 
-1. Numbered
-2. List
+  But is this a sufficient mode of prediction when we start to introduce the most unpredictable element of the universe, humans?
 
-**Bold** and _Italic_ and `Code` text
+  It's definitely a lucrative question, Warren Buffet once promised 1 Billion dollars for the individual that can generate a perfect March Madness bracket.
 
-[Link](url) and ![Image](src)
-```
+  Now that Sports Betting is legal, I present my March Madness predictions that my algorithm generated from historical ranking data. The methodology is further explained in the README. 
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+  And just to see how wrong my algorithm was, I present a number of other methods to predict the outcome of a college basketball game between two teams,
+    - Winner is predicted to have stronger mascot 
+    - Winner is predicted to have more popular team color 
+    - Winner is predicted to be the tallest team
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/F-said/MarchMadness/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+  I hope to generate the following questons in the reader,
+    - Does everything have a predictive model?
+    - Is all data predictive?
+    - Can human generated data be used in models?
+    - Is it better to sometimes guess than use a sophisticated (but wrong) model. 
