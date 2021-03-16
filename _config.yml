@@ -27,7 +27,7 @@ twitter_username: FarukhS6
 github_username:  F-said
 
 # Build settings
-theme: jekyll-theme-minimal
+theme: jekyll-theme-cayman
 plugins:
   - jekyll-feed
 
