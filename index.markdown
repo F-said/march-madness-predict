@@ -3,7 +3,9 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: default
+title: ""
 ---
+
 In Anton Chekhov's 1894 short story, "The Student", Ivan Velikopolsky is heading home
 during a cold March evening. He just left from an encounter with a friend, Vasilisa, who began to cry bitterly when he told her the Biblical story about Peter's betrayal that occured 1,900 years ago.
   
