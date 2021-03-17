@@ -5,7 +5,10 @@
 layout: default
 title: ""
 ---
+![UMBC upsets Virginia in historic game](images\header-1.jpg)
 ## Motivation and Background 
+<details markdown="1">
+<summary style="display:list-item"><span>Russian Literature, French Statistics, & American Basketball</span></summary>
 
 In Anton Chekhov's 1894 short story, ["The Student"](https://americanliterature.com/author/anton-chekhov/short-story/the-student), Ivan Velikopolsky is heading home
 during a cold March evening. He just left from an encounter with a friend, Vasilisa, who cried bitterly when he told her the Biblical story about [Peter's betrayal](https://en.wikipedia.org/wiki/Denial_of_Peter) that was described as occuring 2000 years ago.
@@ -39,6 +42,7 @@ And just to see how wrong my algorithm is, I compare my bracket to a number of o
 - Winner is predicted to always have have stronger mascot (bull vs. wasp)
 - Winner is predicted to always have the more popular team color (everyone loves blue!)
 - Winner is predicted to always be the collectively tallest team (less distance to rim)
+</details>
 
 ## Results 
 <!-- Table showing predictions --> 
@@ -54,32 +58,50 @@ And just to see how wrong my algorithm is, I compare my bracket to a number of o
         <button class="tablinks" onclick="openCity(event, 'Height')">Height</button>
     </div>
     <div id="Machine Learning" class="tabcontent">
-        <h3>London</h3>
-            <p>London is the capital city of England.</p>
+        <p> Insert Image Here</p>
     </div>
     <div id="Mascot" class="tabcontent">
-        <h3>Paris</h3>
-        <p>Paris is the capital of France.</p>
+        <p> Insert Image Here</p>
     </div>
     <div id="Color" class="tabcontent">
-        <h3>Tokyo</h3>
-            <p>Tokyo is the capital of Japan.</p>
+        <p> Insert Image Here</p>
     </div>
     <div id="Height" class="tabcontent">
-        <h3>Tokyo</h3>
-            <p>Tokyo is the capital of Japan.</p>
+        <p> Insert Image Here</p>
     </div>
 </html>
 
 ## The Algorithm
+<details markdown="1">
+<summary style="display:list-item"><span>90% data, 10% science</span></summary>
+</details >
 
 ## The Data
+<details markdown="1">
+<summary style="display:list-item"><span>Expert Systems</span></summary>
+</details >
 
-## Further Questions
+## Conclusions
+<details markdown="1">
+<summary style="display:list-item"><span>Further Questions</span></summary>
+
 - Does everything have a predictive model?
 - Is all data predictive?
 - Is it better to sometimes guess than use a sophisticated (but wrong) model. 
 - Can simple data be effectively used? 
+
+</details >
+
+<details markdown="1">
+<summary style="display:list-item"><span>Looking Forward</span></summary>
+
+- Does everything have a predictive model?
+- Is all data predictive?
+- Is it better to sometimes guess than use a sophisticated (but wrong) model. 
+- Can simple data be effectively used? 
+
+</details >
+
 
 ## Meme tax 
 

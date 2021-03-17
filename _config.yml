@@ -20,8 +20,8 @@
 
 title: March Machine Learning Madness 
 email: f.saidmur@gmail.com
-description: Predicting basketball performance 
-baseurl: "/march-madness-predict" # the subpath of your site, e.g. /blog
+description: Using statistical learning on human-centered fields.
+baseurl: "/march-madness-predict" 
 url: "https://f-said.github.io"
 twitter_username: FarukhS6
 github_username:  F-said
