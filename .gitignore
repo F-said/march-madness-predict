@@ -7,3 +7,6 @@
 archive/
 unform_data/*.csv 
 _site/
+
+.RData
+.Rhistory
