@@ -1,31 +1,12 @@
+# Script pulled from user "utresearch" https://www.kaggle.com/utresearch/visualize-your-predictions
+suppressWarnings(suppressMessages(library(tidyverse)))
+suppressWarnings(suppressMessages(install.packages("devtools")))
+suppressWarnings(suppressMessages(devtools::install_github("dhutexas/collegehoops", dep = TRUE)))
+library(collegehoops)
 
-R version 3.4.2 (2017-09-28) -- "Short Summer"
-Copyright (C) 2017 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
+options(repr.plot.width = 14, repr.plot.height = 8)
+# parse bracket - moving forward predicted winning teams
 
-R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
-
-  Natural language support but running in an English locale
-
-R is a collaborative project with many contributors.
-Type 'contributors()' for more information and
-'citation()' on how to cite R or R packages in publications.
-
-Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for an HTML browser interface to help.
-Type 'q()' to quit R.
-
-[R.app GUI 1.70 (7434) x86_64-apple-darwin15.6.0]
-
-[History restored from /Users/farukhsaidmuratov/.Rapp.history]
-
-> // Cool lib provided by Zach Mayer https://github.com/zachmayer/kaggleNCAA
-> library('kaggleNCAA')
-> dat <- parseBracket('/Users/farukhsaidmuratov/PycharmProjects/MarchMadness/2018/submission2018gb.csv', w=0)
-> sim <- simTourney(dat, 1000, progress=TRUE)
-> bracket <- extractBracket(sim)
-> printableBracket(bracket) 
-assuming women = 0
-> 
+bracket = collegehoops::parse_bracket("predictions/submission_seedordinal_gb.csv", year = '2021')
+# print the bracket
+collegehoops::print_bracket(bracket, font_size = 0.7)

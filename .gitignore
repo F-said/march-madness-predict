@@ -6,3 +6,4 @@
 # Ignore archived data & unformatted data
 archive/
 unform_data/*.csv 
+_site/

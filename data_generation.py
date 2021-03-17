@@ -14,13 +14,14 @@ Seeds["Seed"] = Seeds["Seed"].apply(lambda s: int(s[1:3]))
 # Import unformatted ordinals 
 ordinals_old = pd.read_csv("unform_data\MMasseyOrdinals.csv")
 # Import sample sub
-sample_sub = pd.read_csv("unform_data\MSampleSubmissionStage1.csv").drop(labels="Pred", axis=1)
+sample_sub = pd.read_csv("unform_data\MSampleSubmissionStage2.csv").drop(labels="Pred", axis=1)
 
 # Create ordinals_new 
-fe.createOrdinals(NCAADetailed, ordinals_old)
+# Only consider massey ordinals that exist for 2021
+fe.create_ord(NCAADetailed, ordinals_old, 2021)
 ordinals = pd.read_csv("form_data\Ordinals_new.csv")
 
 # Generate Training Data
-fe.initTrainData(NCAADetailed, ordinals, Seeds)
+fe.gen_train_data(NCAADetailed, ordinals, Seeds)
 # Generate Test Data
 fe.gen_test_data(ordinals, Seeds, sample_sub)

@@ -1,15 +1,15 @@
 import pandas as pd
 import numpy as np
 
-def createOrdinals(ncaa_data, ordinals) -> None: 
+def create_ord(ncaa_data, ordinals, yearSet: int) -> None: 
     """
     Creates a formatted datastruct for massey ordinals that annually reapper after every year of 2003
     
     @ precondtions: directory "year" exists
     @ postcondition: file created in "year" directory that contains massey ordinals that make an appearance from 2003-2019
     """
-    # Get recorded ordinals right before March Madness after 2003
-    Ordinals_new = ordinals[(ordinals["RankingDayNum"] == 133) & (ordinals["Season"] >= 2003)]
+    # Get recorded ordinals right before March Madness after yearSet
+    Ordinals_new = ordinals[(ordinals["RankingDayNum"] == 133) & (ordinals["Season"] >= yearSet)]
 
     # Get all unique ranking systems
     features = list(Ordinals_new.SystemName.unique())
@@ -34,7 +34,7 @@ def createOrdinals(ncaa_data, ordinals) -> None:
     # Create CSV File so you don't have to load every time
     Ordinals_new.to_csv(path_or_buf="form_data\Ordinals_new.csv", index=False)
 
-def initTrainData(ncaa_data, ordinals, seeds) -> None:
+def gen_train_data(ncaa_data, ordinals, seeds) -> None:
     """
     Creates a formatted training data. Training data contains the difference between 
     seeds and the difference between all valid ordinal rankings
@@ -102,7 +102,7 @@ def initTrainData(ncaa_data, ordinals, seeds) -> None:
 
 def gen_test_data(ordinals, seed, sub_file) -> None:
     """
-    Creae test data based off of submission file 
+    Create test data based off of submission file 
 
     @ postcondtion: generate training data set of specified match-ups (that happened) already from 2015-2019.
     Columns match those of train_data 
