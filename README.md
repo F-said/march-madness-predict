@@ -3,7 +3,7 @@ Predicting the outcome of a college basketball game using historical data.
 
 Data found at https://www.kaggle.com/c/ncaam-march-mania-2021/data
 
-Discussion of results found at https://f-said.github.io/MarchMadness/
+Discussion of results found at https://f-said.github.io/march-madness-predict/
 
 # Workflow
 0. Import following data-files from kaggle into `unform_data/` directory (direct links found in README of `unform_data/`)
