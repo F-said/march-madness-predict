@@ -31,7 +31,9 @@ He then proposed a thought experiment: if a sufficiently intelligent being knew 
 
 It is only appropriate then that the field of computational statistical learning emerged as a way to predict outcome using historical data. 
 
-But is this a sufficient mode of prediction when we start to introduce the most unpredictable element of the universe, humans?
+But is this a sufficient mode of prediction when we start to introduce unpredictable humans?
+
+For example, in 2018 after 
 
 Specifically, humans playing basketball.
 
@@ -83,22 +85,37 @@ And just to see how wrong my algorithm is, I compare my bracket to a number of o
 
 ## Conclusions
 <details markdown="1">
+<summary style="display:list-item"><span>Observations on Predictions</span></summary>
+
+Nothing special! If you look it's pretty chalked up
+
+</details >
+
+<details markdown="1">
 <summary style="display:list-item"><span>Further Questions</span></summary>
 
-- Does everything have a predictive model?
+- How do I introduce randomness to a statistic model?
+
 - Is all data predictive?
-- Is it better to sometimes guess than use a sophisticated (but wrong) model. 
-- Can simple data be effectively used? 
+
+- Is it better to sometimes guess than to use a model composed of unpredictive data. 
+
+- Can data generated from human expertise be effectively used in a model?
+    - And can I automate this human expertise? 
 
 </details >
 
 <details markdown="1">
 <summary style="display:list-item"><span>Looking Forward</span></summary>
 
-- Does everything have a predictive model?
-- Is all data predictive?
-- Is it better to sometimes guess than use a sophisticated (but wrong) model. 
-- Can simple data be effectively used? 
+This year, the model I initially created was trained on data that was no longer available. Can I create a model
+
+</details >
+
+<details markdown="1">
+<summary style="display:list-item"><span>Resources</span></summary>
+
+
 
 </details >
 

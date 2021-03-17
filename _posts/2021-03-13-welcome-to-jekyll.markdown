@@ -1,29 +1,123 @@
 ---
 layout: default 
-title:  "Welcome to Jekyll!"
+title:  "2021"
 date:   2021-03-13 12:55:29 -0500
-categories: jekyll update
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+![UMBC upsets Virginia in historic game](images\header-1.jpg)
+## Motivation and Background 
+<details markdown="1">
+<summary style="display:list-item"><span>Russian Literature, French Statistics, & American Basketball</span></summary>
 
-Jekyll requires blog post files to be named according to the following format:
+In Anton Chekhov's 1894 short story, ["The Student"](https://americanliterature.com/author/anton-chekhov/short-story/the-student), Ivan Velikopolsky is heading home
+during a cold March evening. He just left from an encounter with a friend, Vasilisa, who cried bitterly when he told her the Biblical story about [Peter's betrayal](https://en.wikipedia.org/wiki/Denial_of_Peter) that was described as occuring 2000 years ago.
+  
+He realizes that it wasn't the way he told the story that moved her, but rather the guilt that Peter himself felt that brought this emotion from Vasilisa.
 
-`YEAR-MONTH-DAY-title.MARKUP`
+Ivan then says to himself, 
+  
+> "the past... is linked with the present by an unbroken chain of events flowing one out of another"
 
-Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+> "... it seemed to him that he had just seen both ends of that chain; that when he touched one end the other quivered."
 
-Jekyll also offers powerful support for code snippets:
+This chain of causality that Chekhov described might have been inspired by the French father of statistics, Pierre Simon de-Laplace, who in 1814 wrote in his book [A Philosophical Essay on Probabilities](https://bayes.wustl.edu/Manual/laplace_A_philosophical_essay_on_probabilities.pdf)
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
+> "Present events are connected with preceding ones by a tie based upon the evident principle that a thing cannot occur without a cause which produces it." (A Philosophical Essay on Probabilities Ch 2, Pg 3)
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+He then proposed a thought experiment: if a sufficiently intelligent being knew the present state of every single granularity of the Universe, that is every causal link, then this being would be able to perfectly predict the future as well as retrace the past.
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+> "... an intelligence which could comprehend all the forces by which nature is animated and the respective situation of the beings who could compose it - an intelligence sufficiently vast to submit these data to analysis ... for it; nothing would be uncertain and the future, as the past, would be present to its eyes" 
+
+It is only appropriate then that the field of computational statistical learning emerged as a way to predict outcome using historical data. 
+
+But is this a sufficient mode of prediction when we start to introduce unpredictable humans?
+
+For example, in 2018 after 
+
+Specifically, humans playing basketball.
+
+I present my March Madness algorithm that generates probabilities from historical ranking data. The methodology and data used is explained below. 
+
+And just to see how wrong my algorithm is, I compare my bracket to a number of other brackets that use the following methods to predict the outcome of a college basketball: 
+
+- Winner is predicted to always have have stronger mascot (bull vs. wasp)
+- Winner is predicted to always have the more popular team color (everyone loves blue!)
+- Winner is predicted to always be the collectively tallest team (less distance to rim)
+</details>
+
+## Results 
+<!-- Table showing predictions --> 
+<html> 
+    <head>
+        <link rel="stylesheet" href="assets\css\table.css">
+        <script src="assets\js\table.js"></script>
+    </head>
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'Machine Learning')">Machine Learning</button>
+        <button class="tablinks" onclick="openCity(event, 'Mascot')">Mascot</button>
+        <button class="tablinks" onclick="openCity(event, 'Color')">Color</button>
+        <button class="tablinks" onclick="openCity(event, 'Height')">Height</button>
+    </div>
+    <div id="Machine Learning" class="tabcontent">
+        <p> Insert Image Here</p>
+    </div>
+    <div id="Mascot" class="tabcontent">
+        <p> Insert Image Here</p>
+    </div>
+    <div id="Color" class="tabcontent">
+        <p> Insert Image Here</p>
+    </div>
+    <div id="Height" class="tabcontent">
+        <p> Insert Image Here</p>
+    </div>
+</html>
+
+## The Algorithm
+<details markdown="1">
+<summary style="display:list-item"><span>90% data, 10% science</span></summary>
+</details >
+
+## The Data
+<details markdown="1">
+<summary style="display:list-item"><span>Expert Systems</span></summary>
+</details >
+
+## Conclusions
+<details markdown="1">
+<summary style="display:list-item"><span>Observations on Predictions</span></summary>
+
+Nothing special! If you look it's pretty chalked up
+
+</details >
+
+<details markdown="1">
+<summary style="display:list-item"><span>Further Questions</span></summary>
+
+- How do I introduce randomness to a statistic model?
+
+- Is all data predictive?
+
+- Is it better to sometimes guess than to use a model composed of unpredictive data. 
+
+- Can data generated from human expertise be effectively used in a model?
+    - And can I automate this human expertise? 
+
+</details >
+
+<details markdown="1">
+<summary style="display:list-item"><span>Looking Forward</span></summary>
+
+This year, the model I initially created was trained on data that was no longer available. Can I create a model
+
+</details >
+
+<details markdown="1">
+<summary style="display:list-item"><span>Resources</span></summary>
+
+
+
+</details >
+
+
+## Meme tax 
+
+<img src="images\4c7r0e.jpg" width="300" height="400" class="center"/>

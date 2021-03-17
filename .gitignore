@@ -7,6 +7,7 @@ vendor
 ordinal_pkgr/
 unform_data/
 archive/
+ordinal_pred/
 
 .vscode
 DS_STORE
