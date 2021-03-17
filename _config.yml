@@ -21,7 +21,7 @@
 title: March Machine Learning Madness 
 email: f.saidmur@gmail.com
 description: Predicting basketball performance 
-baseurl: "/MarchMadness" # the subpath of your site, e.g. /blog
+baseurl: "/march-madness" # the subpath of your site, e.g. /blog
 url: "https://f-said.github.io"
 twitter_username: FarukhS6
 github_username:  F-said
