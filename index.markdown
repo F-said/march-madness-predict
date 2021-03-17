@@ -50,8 +50,8 @@ And just to see how wrong my algorithm is, I compare my bracket to a number of o
     <div class="tab">
         <button class="tablinks" onclick="openCity(event, 'Machine Learning')">Machine Learning</button>
         <button class="tablinks" onclick="openCity(event, 'Mascot')">Mascot</button>
-        <button class="tablinks" onclick="openCity(event, 'Color')">Tokyo</button>
-        <button class="tablinks" onclick="openCity(event, 'Height')">Tokyo</button>
+        <button class="tablinks" onclick="openCity(event, 'Color')">Color</button>
+        <button class="tablinks" onclick="openCity(event, 'Height')">Height</button>
     </div>
     <div id="Machine Learning" class="tabcontent">
         <h3>London</h3>

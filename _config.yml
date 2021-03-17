@@ -22,7 +22,7 @@ title: March Machine Learning Madness
 email: f.saidmur@gmail.com
 description: Predicting basketball performance 
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://f-said.github.io/MarchMadness/" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://f-said.github.io/MarchMadness"
 twitter_username: FarukhS6
 github_username:  F-said
 
