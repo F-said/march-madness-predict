@@ -18,13 +18,13 @@ Ivan then says to himself,
 
 > "... it seemed to him that he had just seen both ends of that chain; that when he touched one end the other quivered."
 
-This chain of causality that Chekhov described might have been inspired by the French father of statistics, Pierre Simon de-Laplace, who in 1814 wrote, 
+This chain of causality that Chekhov described might have been inspired by the French father of statistics, Pierre Simon de-Laplace, who in 1814 wrote in his book [A Philosophical Essay on Probabilities](https://bayes.wustl.edu/Manual/laplace_A_philosophical_essay_on_probabilities.pdf)
 
 > "Present events are connected with preceding ones by a tie based upon the evident principle that a thing cannot occur without a cause which produces it." (A Philosophical Essay on Probabilities Ch 2, Pg 3)
 
 He then proposed a thought experiment: if a sufficiently intelligent being knew the present state of every single granularity of the Universe, that is every causal link, then this being would be able to perfectly predict the future as well as retrace the past.
 
-> "... an intelligence which could comprehend all the forces by which nature is animated and the respective situation of the beings who could compose it - an intelligence sufficiently vast to submit these data to analysis ... for it; nothing would be uncertain and the future, as the past, would be present to its eyes" (A Philosophical Essay on Probabilities Ch 2, Pg 4)
+> "... an intelligence which could comprehend all the forces by which nature is animated and the respective situation of the beings who could compose it - an intelligence sufficiently vast to submit these data to analysis ... for it; nothing would be uncertain and the future, as the past, would be present to its eyes" 
 
 It is only appropriate then that the field of computational statistical learning emerged as a way to predict outcome using historical data. 
 
