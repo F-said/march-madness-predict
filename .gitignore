@@ -8,6 +8,8 @@ ordinal_pkgr/
 unform_data/
 archive/
 ordinal_pred/
+.Rhistory 
+.RData 
 
 .vscode
 DS_STORE
