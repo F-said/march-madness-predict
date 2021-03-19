@@ -42,7 +42,7 @@ It is only appropriate that the field of computational statistical learning emer
 
 But are the methods of prediction within this field sufficient when we start to introduce unpredictable humans?
 
-For example, within the neary 100-year history of the NCAA's college basketball tournemant "March Madness", a 16-seeded team has never won against a 1-seeded team. That is, until 2018 when the 16-seeded UMBC upset the 1-seeded Virginia. 
+For example, within the neary 100-year history of the NCAA's college basketball tournemant "March Madness", a 16-seeded team has never won against a 1-seeded team. That is, until 2018 when the UMBC beat Virginia. 
 
 <figure>
   <img src="images\header-1.jpg" id="basketballpan">  
@@ -51,12 +51,14 @@ For example, within the neary 100-year history of the NCAA's college basketball 
 
 Could an algorithm have predicted this performance? 
 
-In 2018 I trained a classifier on college basketball team-ranking data. It gave UMBC a 2% chance of victory against Virginia. Perhaps a "better" model would have even given it a 0% chance of victory.
+In 2018 I crudely trained a classifier on college basketball team-ranking data. It gave UMBC a 2% chance of victory. Perhaps a "better" model would have even given it a 0% chance.
 
-This year, my methodology hasn't changed, so I expect my model to miss major upsets. Instead I propose to compare my models results to a bracket that I generated using "unpredictive" principles. Namely, predicting that the winner always has the more popular team color. 
+This year, my methodology hasn't changed, so I expect my model to miss major upsets. Instead I compare my models results to a bracket that I generated using "unpredictive" principles. Namely, predicting that the winner always has the more popular [team color](https://www.spoonflower.com/americas_true_colors). 
 
-Through this approach, I hope to ask the following questions: 
-- Is it better to sometimes guess than use potentially biased data or an improperly trained model? 
+Using this non "data-driven" solution I hope to ask:
+
+- Is it just as bad to guess (or use intuition) than use biased data or a poorly trained model? 
+
 - Is a domain worth modeling when the data does not capture events that could potentially hinder or benefit a team's performance? 
     - For example, ranking data might include how often players make points on the free-throw line, but what about the referee decisions that causes players to get on the free throw line? Or even, how many consecutive days were athletes not able to practice due to COVID-19? 
 </details>
@@ -82,16 +84,10 @@ Through this approach, I hope to ask the following questions:
     <figcaption> Games Accuratley Predicted: 1/63</figcaption>
 </div>
 
-## The Algorithm
-<details markdown="1">
-<summary style="display:list-item"><span>90% data, 10% science</span></summary>
-<br><br>
-</details >
-
 ## The Data
 <details markdown="1">
 <summary style="display:list-item"><span>Expert Systems</span></summary>
-
+As someone who knows nothing about basketball, I relied on ordinal ranking data pulled from the web into a congregate labaled "Massey Ordinals." 
 <br><br>
 </details >
 
@@ -121,18 +117,9 @@ The latter obviously seems like the riskier option.
 <details markdown="1">
 <summary style="display:list-item"><span>Motivation for further development</span></summary>
 
-- 
+
 
 <br><br>
-</details >
-
-<details markdown="1">
-<summary style="display:list-item"><span>Looking Forward</span></summary>
-
-This year, the model I initially created was trained on data that was no longer available. Can I create a model
-<br><br>
-</details >
-
 </details >
 
 ## Meme tax 
