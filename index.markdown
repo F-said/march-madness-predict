@@ -36,7 +36,7 @@ This chain of causality that Chekhov described might have been inspired by the F
 
 He then proposed a thought experiment: if a sufficiently intelligent being knew the present state of every single granularity of the Universe, that is, every causal link, then this being would be able to perfectly predict the future as well as retrace the past.
 
-> "[...] an intelligence which could comprehend all the forces by which nature is animated and the respective situation of the beings who could compose it - an intelligence sufficiently vast to submit these data to analysis ... for it; nothing would be uncertain and the future, as the past, would be present to its eyes" 
+> "[...] an intelligence which could comprehend all the forces by which nature is animated and the respective situation of the beings who could compose it - an intelligence sufficiently vast to submit these data to analysis [...] for it; nothing would be uncertain and the future, as the past, would be present to its eyes" 
 
 It is only appropriate that the field of computational statistical learning emerged as a way to predict outcome using historical data. 
 
@@ -91,6 +91,7 @@ Through this approach, I hope to ask the following questions:
 ## The Data
 <details markdown="1">
 <summary style="display:list-item"><span>Expert Systems</span></summary>
+
 <br><br>
 </details >
 
@@ -101,7 +102,7 @@ Through this approach, I hope to ask the following questions:
 
 My model contains no interesting upset predictions. In fact, I don't think anyone would particularly enjoy a tournemant that falls in-line with my model. 
 
-The fun of "March Madness" is seeing underdogs such as 2018 Loyola accomplish that which all the "experts" deem as unlikely: beat lower-seeded teams. And not just accomplish that once, but enougth times to reach the Final Four.
+The fun of "March Madness" is seeing underdogs such as 2018 Loyola accomplish that which all the "experts" deem as unlikely: beat lower-seeded teams. And not just accomplish that once, but enough times to reach the Final Four.
 
 <img src="images\fans.jpg" id="basketballpan"> 
 
@@ -120,7 +121,8 @@ The latter obviously seems like the riskier option.
 <details markdown="1">
 <summary style="display:list-item"><span>Motivation for further development</span></summary>
 
-- Some ordinal rankings were unavailable this year. This made my training set contain high bias. Can I create a model that generates ordinal rank?
+- 
+
 <br><br>
 </details >
 
@@ -131,11 +133,6 @@ This year, the model I initially created was trained on data that was no longer 
 <br><br>
 </details >
 
-<details markdown="1">
-<summary style="display:list-item"><span>Resources</span></summary>
-
-
-<br><br>
 </details >
 
 ## Meme tax 
