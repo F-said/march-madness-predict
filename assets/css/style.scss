@@ -2,3 +2,22 @@
 ---
 
 @import 'jekyll-theme-cayman';
+
+#headshot {
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
+    width:25%;
+}
+
+#basketballpan {
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
+    width:75%;
+}
+
+figcaption {
+    font-size: small; 
+    text-align: center;
+}

@@ -5,10 +5,14 @@
 layout: default
 title: ""
 ---
-![UMBC upsets Virginia in historic game](images\header-1.jpg)
 ## Motivation and Background 
 <details markdown="1">
 <summary style="display:list-item"><span>Russian Literature, French Statistics, & American Basketball</span></summary>
+
+<figure>
+  <img src="images\anton-chekhov-new.jpg" id="headshot"> 
+    <figcaption>The face of a man that paid for medical school by writing short stories on the weekend</figcaption>
+</figure>
 
 In Anton Chekhov's 1894 short story, ["The Student"](https://americanliterature.com/author/anton-chekhov/short-story/the-student), Ivan Velikopolsky is heading home
 during a cold March evening. He just left from an encounter with a friend, Vasilisa, who cried bitterly when he told her the Biblical story about [Peter's betrayal](https://en.wikipedia.org/wiki/Denial_of_Peter) that was described as occuring 2000 years ago.
@@ -17,91 +21,117 @@ He realizes that it wasn't the way he told the story that moved her, but rather 
 
 Ivan then says to himself, 
   
-> "the past... is linked with the present by an unbroken chain of events flowing one out of another"
+> " 'the past... is linked with the present by an unbroken chain of events flowing one out of another' "
 
 > "... it seemed to him that he had just seen both ends of that chain; that when he touched one end the other quivered."
 
-This chain of causality that Chekhov described might have been inspired by the French father of statistics, Pierre Simon de-Laplace, who in 1814 wrote in his book [A Philosophical Essay on Probabilities](https://bayes.wustl.edu/Manual/laplace_A_philosophical_essay_on_probabilities.pdf)
+This chain of causality that Chekhov described might have been inspired by the French polymath, Pierre-Simon Laplace, who in 1814 wrote in his book [A Philosophical Essay on Probabilities](https://bayes.wustl.edu/Manual/laplace_A_philosophical_essay_on_probabilities.pdf)
 
-> "Present events are connected with preceding ones by a tie based upon the evident principle that a thing cannot occur without a cause which produces it." (A Philosophical Essay on Probabilities Ch 2, Pg 3)
+> "Present events are connected with preceding ones by a tie based upon the evident principle that a thing cannot occur without a cause which produces it." 
 
-He then proposed a thought experiment: if a sufficiently intelligent being knew the present state of every single granularity of the Universe, that is every causal link, then this being would be able to perfectly predict the future as well as retrace the past.
+<figure>
+  <img src="images\9uekyze10wd41.jpg" id="headshot"> 
+    <figcaption></figcaption>
+</figure>
+
+He then proposed a thought experiment: if a sufficiently intelligent being knew the present state of every single granularity of the Universe, that is, every causal link, then this being would be able to perfectly predict the future as well as retrace the past.
 
 > "... an intelligence which could comprehend all the forces by which nature is animated and the respective situation of the beings who could compose it - an intelligence sufficiently vast to submit these data to analysis ... for it; nothing would be uncertain and the future, as the past, would be present to its eyes" 
 
-It is only appropriate then that the field of computational statistical learning emerged as a way to predict outcome using historical data. 
+It is only appropriate that the field of computational statistical learning emerged as a way to predict outcome using historical data. 
 
-But is this a sufficient mode of prediction when we start to introduce unpredictable humans?
+But are the methods of prediction within this field sufficient when we start to introduce unpredictable humans?
 
-For example, in 2018 after 
+For example, within the neary 100-year history of the NCAA's college basketball tournemant "March Madness", a 16-seeded team has never won against a 1-seeded team. That is, until 2018 when the 16-seeded UMBC upset the 1-seeded Virginia. 
 
-Specifically, humans playing basketball.
+<img src="images\header-1.jpg" id="basketballpan"> 
 
-I present my March Madness algorithm that generates probabilities from historical ranking data. The methodology and data used is explained below. 
 
-And just to see how wrong my algorithm is, I compare my bracket to a number of other brackets that use the following methods to predict the outcome of a college basketball: 
+Could an algorithm have predicted this performance? 
 
-- Winner is predicted to always have have stronger mascot (bull vs. wasp)
+In 2018 I trained a classifier on college basketabll team-ranking data. It gave UMBC a 2% chance of victory for that game against. Perhaps a "better" model would have even given it a 0% chance of victory.
+
+This year, my methodology hasn't changed, so I expect my model to miss major upsets. Instead I propose to compare my models results to a number of brackets that I generated using random and "unpredictive" principles. These include:
+
+- Winner is predicted to always have have stronger mascot (Which mascot would win a fight?)
 - Winner is predicted to always have the more popular team color (everyone loves blue!)
 - Winner is predicted to always be the collectively tallest team (less distance to rim)
+
+I hope to motivate the following questions/discussions. I would also appeciate answers!
+
+- Is it better to sometimes guess than to use a model trained on unpredictive data?
+- How do I introduce randomness to a statistic model?
+- Can data generated from human expertise be effectively used in a model without introducing bias?
+    
 </details>
 
 ## Results 
 <!-- Table showing predictions --> 
-<html> 
-    <head>
-        <link rel="stylesheet" href="assets\css\table.css">
-        <script src="assets\js\table.js"></script>
-    </head>
-    <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'Machine Learning')">Machine Learning</button>
-        <button class="tablinks" onclick="openCity(event, 'Mascot')">Mascot</button>
-        <button class="tablinks" onclick="openCity(event, 'Color')">Color</button>
-        <button class="tablinks" onclick="openCity(event, 'Height')">Height</button>
-    </div>
-    <div id="Machine Learning" class="tabcontent">
-        <p> Insert Image Here</p>
-    </div>
-    <div id="Mascot" class="tabcontent">
-        <p> Insert Image Here</p>
-    </div>
-    <div id="Color" class="tabcontent">
-        <p> Insert Image Here</p>
-    </div>
-    <div id="Height" class="tabcontent">
-        <p> Insert Image Here</p>
-    </div>
-</html>
 
-## The Algorithm
+<head>
+    <link rel="stylesheet" href="assets\css\table.css">
+    <script src="assets\js\table.js"></script>
+</head>
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Machine Learning')">Machine Learning</button>
+    <button class="tablinks" onclick="openCity(event, 'Mascot')">Mascot</button>
+    <button class="tablinks" onclick="openCity(event, 'Color')">Color</button>
+    <button class="tablinks" onclick="openCity(event, 'Height')">Height</button>
+</div>
+<div id="Machine Learning" class="tabcontent">
+    <p> Insert Image Here</p>
+</div>
+<div id="Mascot" class="tabcontent">
+    <p> Insert Image Here</p>
+</div>
+<div id="Color" class="tabcontent">
+    <p> Insert Image Here</p>
+</div>
+<div id="Height" class="tabcontent">
+    <p> Insert Image Here</p>
+</div>
+
+
+## The Algorithm(s)
 <details markdown="1">
 <summary style="display:list-item"><span>90% data, 10% science</span></summary>
 </details >
 
-## The Data
+<details markdown="1">
+<summary style="display:list-item"><span>Measuring Mascot Strength</span></summary>
+</details >
+
+## The Data(s)
 <details markdown="1">
 <summary style="display:list-item"><span>Expert Systems</span></summary>
 </details >
 
 ## Conclusions
 <details markdown="1">
-<summary style="display:list-item"><span>Observations on Predictions</span></summary>
+<summary style="display:list-item"><span>Observations on Predicted Bracket</span></summary>
 
-Nothing special! If you look it's pretty chalked up
+My model contains no interesting upset predictions. In fact, I don't think anyone would particularly enjoy a tournemant that falls in-line with my model. 
+
+The fun of "March Madness" is seeing underdogs such as 2018 Loyola accomplish that which all the "experts" deem as unlikely: beat lower-seeded teams. And not just accomplish that once, but enougth times to reach the Final Four.
+
+<img src="images\fans.jpg" id="basketballpan"> 
+
+In fact, life's most exciting moments are arguably when the unlikely becomes realized. For example, retail investors making millions off of the stock market.
+
+<img src="images\stonk.jpg" id="headshot"/>
+
+Training a model on expert data will introduce bias into a model if all the experts fall in line. This will obviously make it "blind" to those unexpected moments we enjoy.
+
+But it still has its validity. As someone that has never watched a basketball game out of enjoyment, I have no domain knowledge on this sport. In result I have two paths to take: I can either rely on the establishment's collective knowledge and the data-based that they create metrics; or I can take the path of self-education and attempt to create metrics myself.
+
+The latter obviously seems like the riskier option. 
 
 </details >
 
 <details markdown="1">
-<summary style="display:list-item"><span>Further Questions</span></summary>
+<summary style="display:list-item"><span>Motivation for further development</span></summary>
 
-- How do I introduce randomness to a statistic model?
-
-- Is all data predictive?
-
-- Is it better to sometimes guess than to use a model composed of unpredictive data. 
-
-- Can data generated from human expertise be effectively used in a model?
-    - And can I automate this human expertise? 
+- Some ordinal rankings were unavailable this year. This made my training set contain high bias. Can I create a model that generates ordinal rank?
 
 </details >
 
@@ -122,4 +152,4 @@ This year, the model I initially created was trained on data that was no longer 
 
 ## Meme tax 
 
-<img src="images\4c7r0e.jpg" width="300" height="400" class="center"/>
+<img src="images\4c7r0e.jpg" id="headshot"/>
