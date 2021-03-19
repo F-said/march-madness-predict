@@ -44,16 +44,21 @@ But are the methods of prediction within this field sufficient when we start to 
 
 For example, within the neary 100-year history of the NCAA's college basketball tournemant "March Madness", a 16-seeded team has never won against a 1-seeded team. That is, until 2018 when the 16-seeded UMBC upset the 1-seeded Virginia. 
 
-<img src="images\header-1.jpg" id="basketballpan"> 
-
+<figure>
+  <img src="images\header-1.jpg" id="basketballpan">  
+    <figcaption>UMBC v. Virginia</figcaption>
+</figure>
 
 Could an algorithm have predicted this performance? 
 
-In 2018 I trained a classifier on college basketabll team-ranking data. It gave UMBC a 2% chance of victory for that game against. Perhaps a "better" model would have even given it a 0% chance of victory.
+In 2018 I trained a classifier on college basketball team-ranking data. It gave UMBC a 2% chance of victory against Virginia. Perhaps a "better" model would have even given it a 0% chance of victory.
 
-This year, my methodology hasn't changed, so I expect my model to miss major upsets. Instead I propose to compare my models results to a bracket that I generated using "unpredictive" principles. Namely, predicting that the winner always has the more popular team color (everyone loves blue!).
+This year, my methodology hasn't changed, so I expect my model to miss major upsets. Instead I propose to compare my models results to a bracket that I generated using "unpredictive" principles. Namely, predicting that the winner always has the more popular team color. 
 
-Through this approach, I hope to ask the following question: is it better to sometimes guess than use potentially biased data/improperly trained model? 
+Through this approach, I hope to ask the following questions: 
+- Is it better to sometimes guess than use potentially biased data or an improperly trained model? 
+- Is a domain worth modeling when the data does not capture events that could potentially hinder or benefit a team's performance? 
+    - For example, ranking data might include how often players make points on the free-throw line, but what about the referee decisions that causes players to get on the free throw line? Or even, how many consecutive days were athletes not able to practice due to COVID-19? 
 </details>
 
 ## Results 
@@ -65,26 +70,28 @@ Through this approach, I hope to ask the following question: is it better to som
 </head>
 <div class="tab">
     <button class="tablinks" onclick="openCity(event, 'Machine Learning')">Machine Learning</button>
-    <button class="tablinks" onclick="openCity(event, 'Color')">Color</button>
+    <button class="tablinks" onclick="openCity(event, 'Team Jersey Color')">Team Jersey Color</button>
 </div>
-<div id="Machine Learning" class="tabcontent">
-    <p> Insert Image Here</p>
-</div>
-<div id="Color" class="tabcontent">
-    <p> Insert Image Here</p>
-</div>
-<br>
 
-## The Algorithm(s)
+<div id="Machine Learning" class="tabcontent">
+    <embed src="brackets\mm.pdf" width="800px" height="600px" />
+    <figcaption> Games Accuratley Predicted: 1/63</figcaption>
+</div>
+<div id="Team Jersey Color" class="tabcontent">
+    <embed src="brackets\teamcolor.pdf" width="800px" height="600px" />
+    <figcaption> Games Accuratley Predicted: 1/63</figcaption>
+</div>
+
+## The Algorithm
 <details markdown="1">
 <summary style="display:list-item"><span>90% data, 10% science</span></summary>
-<br>
+<br><br>
 </details >
 
-## The Data(s)
+## The Data
 <details markdown="1">
 <summary style="display:list-item"><span>Expert Systems</span></summary>
-<br>
+<br><br>
 </details >
 
 
@@ -107,28 +114,28 @@ Training a model on expert data will introduce bias into a model if all the expe
 But it still has its validity. As someone that has never watched a basketball game out of enjoyment, I have no domain knowledge on this sport. In result I have two paths to take: I can either rely on the establishment's collective knowledge and the data-based that they create metrics; or I can take the path of self-education and attempt to create metrics myself.
 
 The latter obviously seems like the riskier option. 
-<br>
+<br><br>
 </details >
 
 <details markdown="1">
 <summary style="display:list-item"><span>Motivation for further development</span></summary>
 
 - Some ordinal rankings were unavailable this year. This made my training set contain high bias. Can I create a model that generates ordinal rank?
-<br>
+<br><br>
 </details >
 
 <details markdown="1">
 <summary style="display:list-item"><span>Looking Forward</span></summary>
 
 This year, the model I initially created was trained on data that was no longer available. Can I create a model
-<br>
+<br><br>
 </details >
 
 <details markdown="1">
 <summary style="display:list-item"><span>Resources</span></summary>
 
 
-<br>
+<br><br>
 </details >
 
 ## Meme tax 
