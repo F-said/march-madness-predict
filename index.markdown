@@ -57,7 +57,7 @@ This year, my methodology hasn't changed, so I expect my model to miss major ups
 
 Using this non "data-driven" solution I hope to ask:
 
-- Is it just as bad to guess (or use intuition) than use biased data or a poorly trained model? 
+- Is it just as bad to guess (or use intuition) than use biased data or a poorly-understood model? 
 
 - Is a domain worth modeling when the data does not capture events that could potentially hinder or benefit a team's performance? 
     - For example, ranking data might include how often players make points on the free-throw line, but what about the referee decisions that causes players to get on the free throw line? Or even, how many consecutive days were athletes not able to practice due to COVID-19? 
@@ -77,20 +77,26 @@ Using this non "data-driven" solution I hope to ask:
 
 <div id="Machine Learning" class="tabcontent">
     <embed src="brackets\mm.pdf" width="800px" height="600px" />
-    <figcaption> Games Accuratley Predicted: 1/63</figcaption>
+    <figcaption> Games Accuratley Predicted: 2/4</figcaption>
 </div>
 <div id="Team Jersey Color" class="tabcontent">
     <embed src="brackets\teamcolor.pdf" width="800px" height="600px" />
-    <figcaption> Games Accuratley Predicted: 1/63</figcaption>
+    <figcaption> Games Accuratley Predicted: 2/4</figcaption>
 </div>
 
 ## The Data
 <details markdown="1">
 <summary style="display:list-item"><span>Expert Systems</span></summary>
-As someone who knows nothing about basketball, I relied on ordinal ranking data pulled from the web into a congregate labaled "Massey Ordinals." 
+
+<figure>
+  <img src="images\massey-sample.png" id="basketballpan">  
+    <figcaption>Subset of "Massey Ordinals" pulled from <a href="https://www.kaggle.com/c/ncaam-march-mania-2021/data">Kaggle</a></figcaption>
+</figure>
+
+
+As so, I relied on ordinal ranking data pulled from the web into a congregate labaled "Massey Ordinals." 
 <br><br>
 </details >
-
 
 ## Conclusions
 <details markdown="1">
