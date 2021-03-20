@@ -34,7 +34,7 @@ This chain of causality that Chekhov described might have been inspired by the F
     <figcaption></figcaption>
 </figure>
 
-He then proposed a thought experiment: if a sufficiently intelligent being knew the present state of every single granularity of the Universe, that is, every causal link, then this being would be able to perfectly predict the future as well as retrace the past.
+He then proposed a thought: if a sufficiently intelligent being knew the present state of every single granularity of the Universe, that is, every causal link, then this being would be able to perfectly predict the future as well as retrace the past.
 
 > "[...] an intelligence which could comprehend all the forces by which nature is animated and the respective situation of the beings who could compose it - an intelligence sufficiently vast to submit these data to analysis [...] for it; nothing would be uncertain and the future, as the past, would be present to its eyes" 
 
@@ -57,7 +57,7 @@ This year, my methodology hasn't changed, so I expect my model to miss major ups
 
 Using this non "data-driven" solution I hope to ask:
 
-- Is it just as bad to guess (or use intuition) than use biased data or a poorly-understood model? 
+- Is it just as bad to guess (or forgo data when making predictions) than use biased data or a poorly-understood model? 
 
 - Is a domain worth modeling when the data does not capture events that could potentially hinder or benefit a team's performance? 
     - For example, ranking data might include how often players make points on the free-throw line, but what about the referee decisions that causes players to get on the free throw line? Or even, how many consecutive days were athletes not able to practice due to COVID-19? 
@@ -77,11 +77,11 @@ Using this non "data-driven" solution I hope to ask:
 
 <div id="Machine Learning" class="tabcontent">
     <embed src="brackets\mm.pdf" width="800px" height="600px" />
-    <figcaption> Games Accuratley Predicted: 2/4</figcaption>
+    <figcaption> Games Accuratley Predicted: 4/12</figcaption>
 </div>
 <div id="Team Jersey Color" class="tabcontent">
     <embed src="brackets\teamcolor.pdf" width="800px" height="600px" />
-    <figcaption> Games Accuratley Predicted: 2/4</figcaption>
+    <figcaption> Games Accuratley Predicted: 8/12</figcaption>
 </div>
 
 ## The Data
@@ -93,8 +93,11 @@ Using this non "data-driven" solution I hope to ask:
     <figcaption>Subset of "Massey Ordinals" pulled from <a href="https://www.kaggle.com/c/ncaam-march-mania-2021/data">Kaggle</a></figcaption>
 </figure>
 
+To skip the process of learning about basketball team statistics, I used a Kaggle provided data-set called <a href="https://www.masseyratings.com/cb/compare.htm">Massey Ordinals</a> that contains a collection of ordinal ranking data that places college basketball teams on a ranked scale based on past performance.
 
-As so, I relied on ordinal ranking data pulled from the web into a congregate labaled "Massey Ordinals." 
+So, the "best" team would have a rank of #1 while the "worst" team will be ranked at the last position (if there are 353 basketball teams competing, it would be ranked as #353). 
+
+
 <br><br>
 </details >
 
