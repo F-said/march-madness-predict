@@ -18,9 +18,9 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: March Machine Learning Madness 
+title: March Madness & Machine Learning
 email: f.saidmur@gmail.com
-description: Using statistical learning on human-centered fields.
+description: 100% Data; 0% Science 
 baseurl: "/march-madness-predict" 
 url: "https://f-said.github.io"
 twitter_username: FarukhS6

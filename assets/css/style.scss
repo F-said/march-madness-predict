@@ -3,14 +3,21 @@
 
 @import 'jekyll-theme-cayman';
 
-#headshot {
+#small-image {
     display: block;
     margin-left: auto;
     margin-right: auto; 
     width:25%;
 }
 
-#basketballpan {
+#med-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
+    width:50%;
+}
+
+#large-image {
     display: block;
     margin-left: auto;
     margin-right: auto; 
