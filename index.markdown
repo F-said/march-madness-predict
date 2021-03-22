@@ -54,9 +54,9 @@ As if an approximation to this hypothetical intelligence, the field of computati
 </figure>
 
 
-And with publicly available packages such as [sklearn](https://scikit-learn.org/stable/), [keras](https://keras.io/), and [tensorflow](https://www.tensorflow.org/) the bar to start using machine learning has never been lower.
+With publicly available packages such as [sklearn](https://scikit-learn.org/stable/), [keras](https://keras.io/), and [tensorflow](https://www.tensorflow.org/) the bar to start using machine learning has never been lower.
 
-And with the [quintillion bytes](http://www.ijsrp.org/research-paper-0114/ijsrp-p2573.pdf) of data that we've produce every day, it seems that every field is now open to modeling. Not everyone can be an expert, but with the availability of open source data & machine learning, they can create models that perform like experts. 
+In conjunction with the [quintillion bytes](http://www.ijsrp.org/research-paper-0114/ijsrp-p2573.pdf) of data that we've produce every day, it seems that every field is now open to modeling. Not everyone can be an expert, but with all these available tools and resources, they can create models that perform like experts. 
 </details>
 
 <details markdown="1">
