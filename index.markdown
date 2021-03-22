@@ -167,4 +167,4 @@ In fact, life's most exciting moments are arguably when the unlikely becomes rea
 
 ## Meme tax 
 
-<img src="images\4c7r0e.jpg" id="med-image"/>
+<img src="images\4c7r0e.jpg" id="small-image"/>
