@@ -6,9 +6,31 @@ layout: default
 title: ""
 ---
 
+<!-- Table showing predictions --> 
+
+<head>
+    <link rel="stylesheet" href="assets\css\table.css">
+    <script src="assets\js\table.js"></script>
+</head>
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Machine Learning')">Machine Learning</button>
+    <button class="tablinks" onclick="openCity(event, 'Team Jersey Color')">Team Jersey Color</button>
+    <button class="tablinks" onclick="openCity(event, 'Crowd Choice')">Crowd Choice</button>
+</div>
+
+<div id="Machine Learning" class="tabcontent">
+    
+</div>
+<div id="Team Jersey Color" class="tabcontent">
+    
+</div>
+<div id="Crowd Choice" class="tabcontent">
+    
+</div>
+
 ## Motivation and Background 
 <details markdown="1">
-<summary style="display:list-item"><span>Russian Literature, French Statistics, & American Basketball</span></summary>
+<summary style="display:list-item"><span>Russian Literature & French Statistics</span></summary>
 
 <figure>
   <img src="images\anton-chekhov-new.jpg" id="small-image"> 
@@ -22,7 +44,7 @@ He realizes that it wasn't the way he told the story that moved her, but rather 
 
 Ivan then says to himself, 
   
-> " 'the past[...] is linked with the present by an unbroken chain of events flowing one out of another' "
+> " 'the past [...] is linked with the present by an unbroken chain of events flowing one out of another' "
 
 
 <figure>
@@ -55,43 +77,45 @@ As if an approximation to this hypothetical intelligence, the field of computati
 </figure>
 
 
+And this field doesn't seem to gate-keep either. 
+
 With publicly available packages such as [sklearn](https://scikit-learn.org/stable/), [keras](https://keras.io/), and [tensorflow](https://www.tensorflow.org/) the bar to start using machine learning has never been lower.
 
-In conjunction with the [quintillion bytes](http://www.ijsrp.org/research-paper-0114/ijsrp-p2573.pdf) of data that we've produce every day, it seems that every field is now open to modeling. Not everyone can be an expert, but with all these available tools and resources, they can create models that perform like experts. 
+In conjunction with the availability of [open-source datasets](https://www.kaggle.com/datasets), it seems that every field is now open to modeling to even the most amateur of programmers. 
+
+This field promises: not everyone can be an expert, but with the right tools and resources, they can create models that perform like experts. 
 </details>
 
 <details markdown="1">
-<summary style="display:list-item"><span>Supposedly.</span></summary> 
+<summary style="display:list-item"><span>American Basketball</span></summary> 
 
-Can we really just enter a field for which we have no "domain knowledge" of and create predictions that suprass the foresight of experts? 
+But can we really explore a field for which we have no "domain knowledge" of and create predictions that suprass the foresight of experts? 
 
-This question is relevant especially when we attempt to predict human-centered fields. 
+This question is especially relevant when we deal with human-centered fields.
 
-<figure>
-  <img src="images\people.jpg" id="med-image"> 
-    <figcaption>What will they do next?</figcaption>
-</figure>
-
-For example, within the neary 100-year history of the NCAA's college basketball tournemant "March Madness", a 16-seeded team has never won against a 1-seeded team. That is, until 2018 when the UMBC beat Virginia. 
+For example, within the neary 100-year history of the NCAA's college basketball tournemant "March Madness", a 16-seeded team has never won against a 1-seeded team. That is, until 2018. 
 
 <figure>
   <img src="images\header-1.jpg" id="large-image">  
     <figcaption>UMBC v. Virginia</figcaption>
 </figure>
 
-Could an algorithm have predicted this performance? 
+Could an algorithm have predicted this performance, even though no basketball "expert" had the abiltiy to predict such an outcome? 
 
 In 2018 I trained a classifier on team-ranking data from basketball enthusiasts. It gave UMBC a 2% chance of victory. Perhaps a model with "better" data would have even given it a 0% chance.
 
-This year, my methodology hasn't changed. Instead, I compare my models results to non data-driven predictions:
+This year, my methodology hasn't changed. Instead, I take a step back and realistically ask: "do I even bother modelling a field for which I have no knowledge on?"
 
-Namely, I compare my model to brackets where:
+As someone who has never watched a basketball game out of enjoyment, my knowledge of basketball terminology limited to "triple-double" because of Ice-Cube's "It Was a Good Day."
+
+So, I compare my models results to the following "non-data driven" bracket predictions:
+
 - the winner always has the more popular [team color](https://www.spoonflower.com/americas_true_colors). 
-- Shaquille O'Neal generated predictions 
+- the winner is chosen by the [wisdom of crowds](https://fantasy.espn.com/tournament-challenge-bracket/2021/en/nationalBracket)
 
 Through this comparison, I begin asking: 
 
-- Is it just as bad to guess sometimes (or forgo data when making predictions) than create a model for a poorly-understood field? 
+- Is it just as bad to guess (or forgo data when making predictions) than create a model for a poorly-understood field? 
 - Does all data point to an interesting & predictive model.
 - Are there fields where algorithms will never be as good as the opinion of "experts"
 - Do experts even exist when it comes to "prediction"?
@@ -106,9 +130,7 @@ Through this comparison, I begin asking:
     <figcaption>Subset of "Massey Ordinals" pulled from <a href="https://www.kaggle.com/c/ncaam-march-mania-2021/data">Kaggle</a></figcaption>
 </figure>
 
-As someone who has never watched a basketball game out of enjoyment, my knowledge of basketball terminology limited to "triple-double" because of Ice-Cube's "It Was a Good Day."
-
-Therefore I relied on ordinal data generated by basketball enthusiasts in a data-set called <a href="https://www.masseyratings.com/cb/compare.htm">Massey Ordinals</a>. The ordinal ranking data placed college basketball teams on a ranked scale based on human-interpreted past performance.
+I relied on ordinal data generated by basketball enthusiasts in a data-set called <a href="https://www.masseyratings.com/cb/compare.htm">Massey Ordinals</a>. The ordinal ranking data placed college basketball teams on a ranked scale based on human-interpreted past performance.
 
 So, the "best" team would have a rank of #1 while the "worst" team will be ranked at the last position (if there are 353 basketball teams competing, it would be ranked as #353). 
 
@@ -117,32 +139,6 @@ Through some
 <br><br>
 </details >
 
-
-## Results 
-<!-- Table showing predictions --> 
-
-<head>
-    <link rel="stylesheet" href="assets\css\table.css">
-    <script src="assets\js\table.js"></script>
-</head>
-<div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'Machine Learning')">Machine Learning</button>
-    <button class="tablinks" onclick="openCity(event, 'Team Jersey Color')">Team Jersey Color</button>
-    <button class="tablinks" onclick="openCity(event, 'Shaq')">Shaquille O'Neal</button>
-</div>
-
-<div id="Machine Learning" class="tabcontent">
-    <embed src="brackets\mm.pdf" width="800px" height="600px" />
-    <figcaption> Games Accuratley Predicted: 4/12 (Correct Matchups/Total Matchups)</figcaption>
-</div>
-<div id="Team Jersey Color" class="tabcontent">
-    <embed src="brackets\teamcolor.pdf" width="800px" height="600px" />
-    <figcaption> Games Accuratley Predicted: 8/12 (Correct Matchups/Total Matchups)</figcaption>
-</div>
-<div id="Shaq" class="tabcontent">
-    <embed src="brackets\shaq.pdf" width="800px" height="600px" />
-    <figcaption> Games Accuratley Predicted: 8/12 (Correct Matchups/Total Matchups)</figcaption>
-</div>
 ## Conclusions
 <details markdown="1">
 <summary style="display:list-item"><span>Observations on Predicted Bracket</span></summary>
@@ -163,7 +159,12 @@ In fact, life's most exciting moments are arguably when the unlikely becomes rea
 
 <details markdown="1">
 <summary style="display:list-item"><span>Motivation for further development</span></summary>
-- Listed at the tournemant's conclusion! 
+
+- How many of these problems can be mollified by "good" statistics?
+  - Ex: finding significant attributes, boot-strapping models, determining causality
+- How many of these problems can be mollified by "good" data-collection?
+  - Ex: Data on stadium location, rate of injury
+- Would a model that only looks for "upsets" be as good as a "chalk" model? 
 <br><br>
 </details >
 
