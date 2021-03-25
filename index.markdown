@@ -6,27 +6,14 @@ layout: default
 title: ""
 ---
 
-<!-- Table showing predictions --> 
-
+<!-- Table showing predictions -->
 <head>
-    <link rel="stylesheet" href="assets\css\table.css">
-    <script src="assets\js\table.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+      $( "#table_bracket" ).load( "assets\html\table_brackets.html" );
+    </script>
 </head>
-<div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'Machine Learning')">Machine Learning</button>
-    <button class="tablinks" onclick="openCity(event, 'Team Jersey Color')">Team Jersey Color</button>
-    <button class="tablinks" onclick="openCity(event, 'Crowd Choice')">Crowd Choice</button>
-</div>
-
-<div id="Machine Learning" class="tabcontent">
-    
-</div>
-<div id="Team Jersey Color" class="tabcontent">
-    
-</div>
-<div id="Crowd Choice" class="tabcontent">
-    
-</div>
+<div id="table_bracket"></div>
 
 ## Motivation and Background 
 <details markdown="1">

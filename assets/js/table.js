@@ -1,4 +1,8 @@
-function openCity(evt, PredName) {
+window.onload=function(){
+  document.getElementById("ML").click();
+};
+
+function switchBracket(evt, PredName) {
     var i, tabcontent, tablinks;
 
     tabcontent = document.getElementsByClassName("tabcontent");
