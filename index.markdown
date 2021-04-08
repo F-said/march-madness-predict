@@ -316,7 +316,7 @@ title: ""
 
 <div id="Team Jersey Color" class="tabcontent">
     <section id="bracket">
-    <div class="round-details">32/62 Correctly Predicted</div>
+    <div class="round-details">29/62 Correctly Predicted</div>
 	  <div class="container">
 	    <div class="split split-one">
 		    <div class="round round-one current">
@@ -485,7 +485,7 @@ title: ""
           <div class="round round-three current">
             <div class="round-details">Sweet 16</div>						
             <ul class="matchup">
-              <li class="team team-top" id="correct">North Carolina</li>
+              <li class="team team-top" id="wrong">North Carolina</li>
               <li class="team team-bottom" id="correct">Villanova</li>
             </ul>	
             <ul class="matchup">
@@ -504,8 +504,8 @@ title: ""
           <div class="round round-two current">
             <div class="round-details">Second Round</div>						
             <ul class="matchup">
-              <li class="team team-top" id="correct">Hartford</li>
-              <li class="team team-bottom" id="correct">North Carolina</li>
+              <li class="team team-top" id="wrong">Hartford</li>
+              <li class="team team-bottom" id="wrong">North Carolina</li>
             </ul>	
             <ul class="matchup">
               <li class="team team-top" id="correct">Villanova</li>
