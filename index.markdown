@@ -517,11 +517,11 @@ title: ""
             </ul>
             <ul class="matchup">
               <li class="team team-top" id="wrong">Florida</li>
-              <li class="team team-bottom" id="wrong">Oral Roberts</li>
+              <li class="team team-bottom" id="correct">Oral Roberts</li>
             </ul>			
             <ul class="matchup">
-              <li class="team team-top" id="correct">Drexel</li>
-              <li class="team team-bottom" id="correct">Georgia Tech</li>
+              <li class="team team-top" id="wrong">Drexel</li>
+              <li class="team team-bottom" id="wrong">Georgia Tech</li>
             </ul>	
             <br>
             <ul class="matchup">
@@ -530,7 +530,7 @@ title: ""
             </ul>	
             <ul class="matchup">
               <li class="team team-top" id="wrong">San Diego</li>
-              <li class="team team-bottom" id="correct">Morehead State</li>
+              <li class="team team-bottom" id="wrong">Morehead State</li>
             </ul>
             <ul class="matchup">
               <li class="team team-top" id="correct">Rutgers</li>
