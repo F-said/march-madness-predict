@@ -37,6 +37,7 @@ X_train = X_train.drop(labels="Season", axis=1).\
 X_test = X_test.drop(labels="Season", axis=1).\
     drop(labels="Team1", axis=1).drop(labels="Team2", axis=1).drop(labels="WOLDiff", axis=1)
 
+print("test print")
 # Gradient Boosted Trees Classifier
 # n, c, f, d, bestloss = gb.find_GB_params(X_train, y_train, X_test, y_test)
 # Accuracy GB:  0.7611940298507462
